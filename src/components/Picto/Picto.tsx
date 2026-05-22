@@ -136,14 +136,17 @@ export const Picto = forwardRef<
 >(({ name, size = 80, ariaLabel, className, ...rest }, ref) => {
   const [svgFailed, setSvgFailed] = useState(false);
 
-  // URL-encode the name (handles spaces, ampersands, etc. in Labster naming)
-  const encodedName = encodeURIComponent(name);
+  // Note : pas d'encodeURIComponent ici — le navigateur encode automatiquement
+  // les caractères spéciaux (é, &, espaces) dans l'attribut src de l'img.
+  // Si on pré-encode, on risque le double encoding sur certains serveurs.
+  // Filenames Labster avec caractères spéciaux supportés :
+  //   "Déroulé.svg", "Picto-ux&ui-red.svg", "Picto-funding strategy-blue.svg"
 
   // Try to load the SVG. Falls back to placeholder if 404.
   if (!svgFailed) {
     return (
       <img
-        src={`/assets/pictos/${encodedName}.svg`}
+        src={`/assets/pictos/${name}.svg`}
         alt={ariaLabel || name}
         width={size}
         height={size}
