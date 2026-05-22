@@ -1,0 +1,60 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+  Labster DS — Global styles
+  ----------------------------------------------------------------
+  Fieldwork (commercial) is NOT served here. If you have a Fieldwork
+  license, drop the @font-face declarations below uncommented and
+  serve the .woff2 files from /public/fonts/.
+
+  Without Fieldwork installed locally, Storybook + Vite will fall back
+  to Inter (next in the labster font stack). The visual result will
+  preserve structure but not the brand identity precisely.
+*/
+
+/*
+@font-face {
+  font-family: "Fieldwork";
+  font-weight: 300;
+  font-style: normal;
+  src: url("/fonts/Fieldwork-Geo-Light.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fieldwork";
+  font-weight: 400;
+  font-style: normal;
+  src: url("/fonts/Fieldwork-Geo-Regular.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fieldwork";
+  font-weight: 600;
+  font-style: normal;
+  src: url("/fonts/Fieldwork-Geo-Demibold.woff2") format("woff2");
+  font-display: swap;
+}
+@font-face {
+  font-family: "Fieldwork";
+  font-weight: 700;
+  font-style: normal;
+  src: url("/fonts/Fieldwork-Geo-Bold.woff2") format("woff2");
+  font-display: swap;
+}
+*/
+
+/* Inter fallback via Google Fonts (loaded by Storybook preview-head.html) */
+
+html, body {
+  font-family: "Fieldwork", "Inter", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* DS color base for body — Smoke (neutral surface) by default */
+body {
+  background-color: #f5f6f8;
+  color: #0e2946;
+}

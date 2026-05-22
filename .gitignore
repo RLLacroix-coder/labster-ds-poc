@@ -3,3 +3,26 @@ node_modules/
 .env
 .env.local
 *.log
+
+# Build outputs
+dist/
+dist-ssr/
+storybook-static/
+
+# IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Vite cache
+.vite/
+
+# Storybook cache
+.storybook-out/
+
+# Type checking
+*.tsbuildinfo
