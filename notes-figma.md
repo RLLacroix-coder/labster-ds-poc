@@ -50,16 +50,37 @@ Fichier Figma généré comme miroir visuel du repo, pour validation designer (�
 - **fileKey** : `fTtwrwxa74iSPMMTbq5GK8`
 - **Scope V0.1** : minimal (Cover + Tokens + Button atoms uniquement)
 
-### Contenu (V0.5.3 — split presentation vs instance)
+### Contenu (V1.0 — Refonte B.6 du 2026-05-22)
+
+Le Figma DS V0.1 a été entièrement refondu pour matcher le code React V1 (Phase B.6). Tous les composants sont désormais en **Component Sets natifs** avec variant properties, instanciables depuis le panneau Assets.
 
 | Page | Rôle | Contenu |
 |---|---|---|
-| Cover | Présentation | Titre + version + lien repo + note Fieldwork fallback Inter |
-| Tokens | Display tokens natifs | 21 Paint Styles + 17 Text Styles + 3 Effect Styles avec swatches référencés |
-| **Atoms** | **Planche visuelle (frames, non instantiable)** | Outer frame + 6 sections (1/variant) avec grilles 5 sizes × 5 states × 2 (text+icon) = 300 boutons rendus |
-| **Component Library** | **Source instantiable (Component Sets natifs)** | Button Component Set avec 4 properties (variant × size × state × icon-only) = 300 variants disponibles via Assets panel |
-| Brand Assets | Références brand | Logo + Icons + Pictos placeholders + références nodeIds brand kit |
-| Patterns | Exemples composés | Contact form Labster (instance Button variant=accent-cta size=Large depuis Component Library) |
+| **Cover** | Présentation | Titre V1.0 + lien repo GitHub + sommaire + note source-of-truth |
+| **Tokens** | Styles natifs Figma | 23 Paint Styles (incl. `Success` NEW) + 17 Text Styles + 3 Effect Styles + Radius |
+| **Atoms** | 6 Component Sets natifs | Button (6) · ButtonLink (2) · Badge (18) · Input (12) · Checkbox (4) · NavItem (12) = 54 variants |
+| **Molecules** | 2 Component Sets natifs | Card (5 variants × 3 sizes = 15) · ManagerCard (4 managers Labster) |
+| **Brand Assets** | Refs brand kit | Logo Labster + Floating shapes + références Pictos/Illustrations (placeholders) |
+| **Patterns** | Compositions Labster | Contact Form (Labster) avec **vraies instances** Input + Button accent-cta |
+
+**Total : 8 Component Sets · 73 variants · 1 pattern Labster**.
+
+### Component Sets disponibles depuis Assets panel
+
+Resources > Assets (icône en haut à gauche Figma) → cherche "Button", "Card", "Input", etc. → drag-and-drop dans n'importe quelle frame.
+
+### Synchronisation Code ↔ Figma
+
+- **Source de vérité = repo Git** (`DESIGN.md` + `src/components/*.tsx` + `metadata.ts`)
+- Le Figma est un **miroir généré** via MCP (skill mandatory `figma-use`)
+- Modifications → PR sur le repo → re-run B.6 si besoin de re-synchroniser Figma
+
+### Migration de l'ancienne structure
+
+V0.5.3 avait 5 pages (Cover + Tokens + Atoms planche visuelle + Brand Assets + Patterns + Component Library séparé). V1 consolide :
+- ❌ Page "Component Library" supprimée — les Component Sets sont directement dans Atoms et Molecules
+- ✅ Page "Atoms" devient la source instantiable + planche visuelle en même temps (Component Sets natifs)
+- ✅ Page "Molecules" NEW créée pour Card + ManagerCard
 
 ### À étendre en V0.2 (scope complet du tutoriel V0.3)
 
