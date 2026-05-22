@@ -22,3 +22,11 @@ POC AI-ready Design System (Labster).
 ## Sources Figma
 
 Voir `notes-figma.md`.
+
+## Output Figma (V0.3 boucle Code → Figma, 2026-05-22)
+
+Le tutoriel V0.3 ajoute une **boucle Code → Figma** : à l'étape 6.4, on génère un fichier Figma miroir des `DESIGN.md`, pour validation visuelle designer (étape 6.5) avant la couche Intent (étape 7).
+
+- **Fichier** : `02-Labster-DS-V0.1` — https://www.figma.com/design/fTtwrwxa74iSPMMTbq5GK8
+- **Scope** : minimal (Cover + Tokens + Button atoms). À étendre.
+- **Source de vérité** : ce repo (DESIGN.md). Le Figma est un miroir généré, pas la source.
