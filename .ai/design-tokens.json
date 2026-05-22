@@ -1,0 +1,144 @@
+{
+  "$schema": "labster-ds-design-tokens-v1",
+  "version": "V0.1",
+  "generated_at": "2026-05-22",
+  "description": "Index of design tokens consumed by each Labster DS component. Used to answer Report queries like 'what tokens does X consume?' or 'where is token Y used?'. Tokens use DTCG dot-path notation; values are sourced from the Labster Tokens Figma styles (no Figma Variables available).",
+  "tokens_catalog": {
+    "colors": {
+      "brand.blue": "#476AE3",
+      "brand.red": "#EF4C59",
+      "brand.yellow": "#FFC31D",
+      "brand.blue-light": "#D6DFFF",
+      "brand.red-light": "#FCD9D9",
+      "brand.yellow-light": "#FFECB8",
+      "semantic.action-primary": "#476AE3",
+      "semantic.action-primary-hover": "#3A57BC",
+      "semantic.danger": "#EF4C59",
+      "semantic.danger-hover": "#E04854",
+      "semantic.warning": "#FFC31D",
+      "neutral.white": "#FFFFFF",
+      "neutral.smoke": "#F5F6F8",
+      "neutral.grey-1": "#E3E5E8",
+      "neutral.grey-2": "#A9B2BC",
+      "neutral.grey-3": "#707F8F",
+      "neutral.grey-4": "#465B72",
+      "neutral.grey-5": "#273C53",
+      "neutral.grey-6": "#0E2946"
+    },
+    "typography": {
+      "title-large": "Barlow Semi Bold 18/28",
+      "body-medium": "Barlow Medium 14/24",
+      "p-ui": "Barlow Regular 16/24",
+      "subtle": "Barlow Regular 14/20",
+      "label-inline": "Barlow Medium 14/14"
+    },
+    "elevation": {
+      "small": "0 2px 8px 0 rgba(0, 46, 70, 0.1)",
+      "medium": "0 4px 16px 0 rgba(0, 46, 70, 0.1)",
+      "large": "0 8px 24px 0 rgba(0, 46, 70, 0.1)"
+    },
+    "shapes.radius": {
+      "sm": "6px",
+      "md": "8px",
+      "lg": "12px",
+      "pill": "96px"
+    }
+  },
+  "components": [
+    {
+      "component": "Button",
+      "tokens": [
+        { "path": "colors.semantic.action-primary", "usage_context": "primary variant background" },
+        { "path": "colors.semantic.action-primary-hover", "usage_context": "primary variant hover background" },
+        { "path": "colors.semantic.danger", "usage_context": "danger variant background" },
+        { "path": "colors.semantic.danger-hover", "usage_context": "danger variant hover background" },
+        { "path": "colors.neutral.white", "usage_context": "secondary background, text on dark variants" },
+        { "path": "colors.neutral.smoke", "usage_context": "secondary hover, ghost hover" },
+        { "path": "colors.neutral.grey-1", "usage_context": "secondary border default" },
+        { "path": "colors.neutral.grey-2", "usage_context": "secondary border hover, disabled background" },
+        { "path": "colors.neutral.grey-6", "usage_context": "secondary/ghost text, icon" },
+        { "path": "typography.body-medium", "usage_context": "button label" },
+        { "path": "shapes.radius.sm", "usage_context": "default + icon-only-square radius" },
+        { "path": "shapes.radius.pill", "usage_context": "icon-only-circle radius" }
+      ]
+    },
+    {
+      "component": "Input",
+      "tokens": [
+        { "path": "colors.neutral.white", "usage_context": "field background" },
+        { "path": "colors.neutral.smoke", "usage_context": "read-only background" },
+        { "path": "colors.neutral.grey-1", "usage_context": "border disabled, read-only border (dashed)" },
+        { "path": "colors.neutral.grey-2", "usage_context": "border default" },
+        { "path": "colors.neutral.grey-3", "usage_context": "placeholder text, disabled value text" },
+        { "path": "colors.neutral.grey-6", "usage_context": "value text, label text" },
+        { "path": "colors.semantic.danger", "usage_context": "border error, error message text, alert-circle icon" },
+        { "path": "colors.semantic.action-primary", "usage_context": "focus ring (outer 2px)" },
+        { "path": "colors.brand.red-light", "usage_context": "error variant background (optional, for critical errors)" },
+        { "path": "typography.body-medium", "usage_context": "label" },
+        { "path": "typography.p-ui", "usage_context": "value/placeholder for size=default" },
+        { "path": "typography.subtle", "usage_context": "value/placeholder for size=small, helper text, error message" },
+        { "path": "shapes.radius.sm", "usage_context": "field radius" }
+      ]
+    },
+    {
+      "component": "Dialog",
+      "tokens": [
+        { "path": "colors.neutral.white", "usage_context": "container background" },
+        { "path": "colors.neutral.grey-1", "usage_context": "container border" },
+        { "path": "colors.neutral.grey-3", "usage_context": "description text" },
+        { "path": "colors.neutral.grey-6", "usage_context": "title text, backdrop (with opacity 0.5)" },
+        { "path": "colors.semantic.danger", "usage_context": "primary button color for destructive-confirmation" },
+        { "path": "typography.title-large", "usage_context": "dialog title" },
+        { "path": "typography.subtle", "usage_context": "dialog description" },
+        { "path": "typography.body-medium", "usage_context": "buttons inside (inherited from Button)" },
+        { "path": "shapes.radius.md", "usage_context": "container radius" },
+        { "path": "elevation.large", "usage_context": "container box-shadow" }
+      ]
+    }
+  ],
+  "token_to_components": {
+    "colors.semantic.action-primary": ["Button (primary bg)", "Input (focus ring)", "Dialog (via Button primary children)"],
+    "colors.semantic.danger": ["Button (danger bg)", "Input (state=error)", "Dialog (destructive-confirmation via Button danger)"],
+    "colors.neutral.white": ["Button (secondary bg, text on dark)", "Input (field bg)", "Dialog (container bg)"],
+    "colors.neutral.smoke": ["Button (secondary hover, ghost hover)", "Input (read-only bg)"],
+    "colors.neutral.grey-1": ["Button (secondary border)", "Input (disabled border)", "Dialog (container border)"],
+    "colors.neutral.grey-2": ["Button (border hover, disabled bg)", "Input (border default)"],
+    "colors.neutral.grey-3": ["Input (placeholder, disabled value)", "Dialog (description)"],
+    "colors.neutral.grey-6": ["Button (secondary/ghost text)", "Input (value, label)", "Dialog (title, backdrop)"],
+    "typography.body-medium": ["Button (label)", "Input (label)", "Dialog (buttons via children)"],
+    "typography.title-large": ["Dialog (title)"],
+    "typography.subtle": ["Input (size-small, helper, error)", "Dialog (description)"],
+    "shapes.radius.sm": ["Button (default + icon-square)", "Input (field)"],
+    "shapes.radius.md": ["Dialog (container)"],
+    "elevation.large": ["Dialog (container shadow)"]
+  },
+  "tokens_unused_in_current_components": [
+    "colors.brand.yellow",
+    "colors.brand.yellow-light",
+    "colors.brand.blue-light",
+    "colors.semantic.warning",
+    "elevation.small",
+    "elevation.medium",
+    "shapes.radius.lg",
+    "colors.neutral.grey-4",
+    "colors.neutral.grey-5"
+  ],
+  "tokens_missing_in_labster_to_define": [
+    {
+      "path": "colors.semantic.success",
+      "reason": "No green/success color observed in Labster styleguide. Required for confirmation states (Toast success, badge success)."
+    },
+    {
+      "path": "colors.semantic.action-primary-hover",
+      "reason": "Extrapolated value #3A57BC, not observed in Labster styleguide. To validate or replace."
+    },
+    {
+      "path": "typography.scale.complete",
+      "reason": "Full Type scale Web not extracted (only inferred Inter-equivalent values used for POC). Required for headings (H1-H6) and complete body scale."
+    },
+    {
+      "path": "spacing.scale",
+      "reason": "No spacing scale observed in Labster styleguide. POC uses Shadcn-derived values 4/6/8/12/16/24/32 ad hoc."
+    }
+  ]
+}

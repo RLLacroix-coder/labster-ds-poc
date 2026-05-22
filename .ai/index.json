@@ -1,0 +1,122 @@
+{
+  "$schema": "labster-ds-index-v1",
+  "version": "V0.1",
+  "generated_at": "2026-05-22",
+  "generated_by": "POC manual generation (étape 8 tutoriel)",
+  "ds_metadata": {
+    "name": "Labster Design System",
+    "version": "V0.1",
+    "design_md": "../DESIGN.md",
+    "sources": {
+      "tokens_figma": {
+        "file_key": "PVYjz7w3CG5Lh0GU2iAoG3",
+        "file_name": "00-Labster-Tokens",
+        "type": "brand kit, legacy Figma styles (no Variables)"
+      },
+      "components_figma": {
+        "file_key": "tPwrOV9EX9jLXuxsBskINR",
+        "file_name": "01-Shadcn-Kit-POC",
+        "type": "Shadcn UI Kit, re-tokenized on Labster"
+      }
+    }
+  },
+  "components": [
+    {
+      "name": "Button",
+      "type": "atom",
+      "version": "V0.1",
+      "paths": {
+        "design_md": "../components/Button.design.md",
+        "metadata_ts": "../components/Button.metadata.ts",
+        "inventory_md": "../components/inventaire-Button.md"
+      },
+      "source": {
+        "figma_file_key": "tPwrOV9EX9jLXuxsBskINR",
+        "figma_node_id": "1:85",
+        "figma_url": "https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=1-85"
+      },
+      "variants_count": 9,
+      "variants": [
+        "primary",
+        "secondary",
+        "ghost",
+        "danger",
+        "link",
+        "size-small",
+        "icon-only-square",
+        "icon-only-circle",
+        "loading"
+      ],
+      "states": ["default", "hover", "focus", "active", "disabled", "loading"],
+      "accessibility_target": "WCAG AA"
+    },
+    {
+      "name": "Input",
+      "type": "atom",
+      "version": "V0.1",
+      "paths": {
+        "design_md": "../components/Input.design.md",
+        "metadata_ts": "../components/Input.metadata.ts",
+        "inventory_md": "../components/inventaire-Input.md"
+      },
+      "source": {
+        "figma_file_key": "tPwrOV9EX9jLXuxsBskINR",
+        "figma_node_id": "2:285",
+        "figma_url": "https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=2-285"
+      },
+      "variants_count": 5,
+      "variants": [
+        "size-default",
+        "size-small",
+        "label-inline-left",
+        "state-error",
+        "state-read-only"
+      ],
+      "states": [
+        "default",
+        "focused",
+        "completed",
+        "error",
+        "disabled",
+        "read-only"
+      ],
+      "accessibility_target": "WCAG AA"
+    },
+    {
+      "name": "Dialog",
+      "type": "molecule",
+      "version": "V0.1",
+      "paths": {
+        "design_md": "../components/Dialog.design.md",
+        "metadata_ts": "../components/Dialog.metadata.ts",
+        "inventory_md": "../components/inventaire-Dialog.md"
+      },
+      "source": {
+        "figma_file_key": "tPwrOV9EX9jLXuxsBskINR",
+        "figma_node_id": "4:329",
+        "figma_url": "https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=4-329"
+      },
+      "variants_count": 5,
+      "variants": [
+        "informational",
+        "confirmation",
+        "destructive-confirmation",
+        "form",
+        "backdrop-overlay"
+      ],
+      "states": ["closed", "open", "closing"],
+      "accessibility_target": "WCAG AA",
+      "substitution_note": "Substitution of Card (does not exist in Shadcn kit)."
+    }
+  ],
+  "statistics": {
+    "total_components": 3,
+    "by_type": {
+      "atom": 2,
+      "molecule": 1,
+      "organism": 0
+    },
+    "total_variants": 19,
+    "variants_to_create_in_figma": 5
+  }
+}

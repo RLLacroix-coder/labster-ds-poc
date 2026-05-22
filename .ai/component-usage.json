@@ -1,0 +1,56 @@
+{
+  "$schema": "labster-ds-component-usage-v1",
+  "version": "V0.1",
+  "generated_at": "2026-05-22",
+  "description": "Relations source -> target between Labster DS components. Used to answer Report queries like 'where is X used?' or 'what does Y contain?'.",
+  "relations": [
+    {
+      "source": "Dialog",
+      "target": "Input",
+      "relation_type": "contains",
+      "count": "0..n (typically 0..5)",
+      "context": "Form variant of Dialog uses Input children (size-small + labelPlacement=inline-left in the Shadcn master 4:329)",
+      "evidence": {
+        "design_md": "../components/Dialog.design.md#anatomy",
+        "metadata_ts_composition": "Dialog.metadata.ts composition[0]"
+      }
+    },
+    {
+      "source": "Dialog",
+      "target": "Button",
+      "relation_type": "contains",
+      "count": "1..2",
+      "context": "Button section of Dialog. Variant depends on Dialog variant: informational uses 1 secondary; confirmation uses secondary+primary; destructive-confirmation uses secondary+danger; form uses secondary+primary.",
+      "evidence": {
+        "design_md": "../components/Dialog.design.md#anatomy",
+        "metadata_ts_composition": "Dialog.metadata.ts composition[1]"
+      }
+    },
+    {
+      "source": "Input",
+      "target": "Button",
+      "relation_type": "contains-optional",
+      "count": "0..1",
+      "context": "Input can optionally include a suffix Button (e.g. 'Subscribe' inline button observed in Shadcn variants 6:268 / 6:276). Not promoted as a standalone Labster pattern in V0.1 but documented for completeness.",
+      "evidence": {
+        "design_md": "../components/Input.design.md#anatomie",
+        "shadcn_node_ids": ["6:268", "6:276", "6:366", "6:377"]
+      }
+    }
+  ],
+  "expected_screens": [
+    {
+      "name": "login-screen (étape 9 du POC)",
+      "uses": ["Input", "Button"],
+      "optional_uses": ["Dialog"]
+    }
+  ],
+  "missing_relations_noted": [
+    {
+      "expected_source": "Card",
+      "expected_target": "Button + Input",
+      "status": "not_applicable",
+      "reason": "Card does not exist in Shadcn kit. Replaced by Dialog for the POC."
+    }
+  ]
+}
