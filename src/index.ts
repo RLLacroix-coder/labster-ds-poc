@@ -16,6 +16,7 @@ export * from "./components/Card";
 // Brand assets
 export * from "./components/LabsterLogo";
 export * from "./components/Picto";
+export * from "./components/Illustration";
 
 // Tokens
 export * from "./tokens";
