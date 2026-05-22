@@ -136,17 +136,25 @@ export const Picto = forwardRef<
 >(({ name, size = 80, ariaLabel, className, ...rest }, ref) => {
   const [svgFailed, setSvgFailed] = useState(false);
 
-  // Note : pas d'encodeURIComponent ici — le navigateur encode automatiquement
-  // les caractères spéciaux (é, &, espaces) dans l'attribut src de l'img.
-  // Si on pré-encode, on risque le double encoding sur certains serveurs.
-  // Filenames Labster avec caractères spéciaux supportés :
-  //   "Déroulé.svg", "Picto-ux&ui-red.svg", "Picto-funding strategy-blue.svg"
+  // 🐛 Fix macOS NFD : sur macOS (HFS+/APFS), les noms de fichiers Unicode
+  // sont stockés en NFD (Normalized Form Decomposed) où "é" = "e" + accent
+  // combinant. JavaScript utilise NFC (Composed) par défaut. Le navigateur
+  // fait la requête HTTP avec le nom NFC, Vite cherche le fichier — mismatch.
+  // Solution : normaliser le name en NFD côté code pour matcher le filesystem.
+  //
+  // Exemple : "Déroulé" en JS (NFC, "c3 a9") → "Déroulé" (NFD,
+  // "65 cc 81 65 cc 81") qui matche le fichier macOS "Déroulé.svg".
+  //
+  // Sur Linux (déploiement prod), les filenames sont en NFC — la normalize
+  // NFD côté code n'aura pas d'effet visible si le fichier prod est en NFC
+  // (la normalize NFC d'un nom NFC ne change rien). Donc safe.
+  const normalizedName = name.normalize("NFD");
 
   // Try to load the SVG. Falls back to placeholder if 404.
   if (!svgFailed) {
     return (
       <img
-        src={`/assets/pictos/${name}.svg`}
+        src={`/assets/pictos/${normalizedName}.svg`}
         alt={ariaLabel || name}
         width={size}
         height={size}
