@@ -1,12 +1,20 @@
 /**
  * Labster DS — Public entry point.
  *
- * Consumers : `import { Button, tokens } from "labster-ds-poc";`
- *
- * Re-exports : components + tokens. Add new components here as Phase B.4+ progresses.
+ * Consumers : `import { Button, Input, Card, Icon, LabsterLogo, Picto, tokens } from "labster-ds-poc";`
  */
 
+// Atoms
 export * from "./components/Button";
 export * from "./components/Input";
+export * from "./components/Icon";
+
+// Molecules
 export * from "./components/Card";
+
+// Brand assets
+export * from "./components/LabsterLogo";
+export * from "./components/Picto";
+
+// Tokens
 export * from "./tokens";
