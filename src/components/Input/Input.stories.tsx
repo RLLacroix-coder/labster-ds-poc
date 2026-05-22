@@ -9,24 +9,22 @@ const meta: Meta<typeof Input> = {
     docs: {
       description: {
         component:
-          "Labster DS Input. Source : components/Input.design.md + components/Input.metadata.ts. " +
-          "Atom for user text input. Variants: size (default/small), labelPlacement (above/inline-left), " +
-          "states (default/focused/completed/error/disabled/read-only). " +
-          "⚠ state=error is CREATED FOR LABSTER (absent from Shadcn source) — border `semantic.danger` + alert-circle icon + helper in danger color.",
+          "Labster DS Input — refondu V1 pour matcher le pattern Labster officiel " +
+          "observé dans 01-Labster-Web-components (nodeId 2:2302). " +
+          "Specs : bg neutral.smoke, border grey-1, radius md (8px), height 44px, " +
+          "label Fieldwork Hum DemiBold 14px ls 1px grey-3, required asterisk rouge. " +
+          "3 variants : input / dropdown / search. 2 colorModes : light / dark. " +
+          "Extensions DS (créées par POC) : state=error, disabled, read-only.",
       },
     },
   },
   argTypes: {
-    size: {
-      control: { type: "select" },
-      options: ["default", "small"],
-    },
-    labelPlacement: {
-      control: { type: "select" },
-      options: ["above", "inline-left"],
-    },
+    variant: { control: { type: "select" }, options: ["input", "dropdown", "search"] },
+    colorMode: { control: { type: "select" }, options: ["light", "dark"] },
+    size: { control: { type: "select" }, options: ["default", "small"] },
     label: { control: { type: "text" } },
     placeholder: { control: { type: "text" } },
+    required: { control: { type: "boolean" } },
     helperText: { control: { type: "text" } },
     errorMessage: { control: { type: "text" } },
     disabled: { control: { type: "boolean" } },
@@ -35,7 +33,7 @@ const meta: Meta<typeof Input> = {
   tags: ["autodocs"],
   decorators: [
     (Story) => (
-      <div style={{ width: 420 }}>
+      <div style={{ width: 320 }}>
         <Story />
       </div>
     ),
@@ -51,65 +49,116 @@ type Story = StoryObj<typeof Input>;
 
 export const Playground: Story = {
   args: {
-    label: "Email",
-    placeholder: "name@example.com",
-    helperText: "We will send your sign-in link to this address.",
-    size: "default",
-    labelPlacement: "above",
+    label: "Input title",
+    placeholder: "Input text",
+    required: true,
   },
 };
 
 // =============================================================================
-// STATES
+// FIGMA REFERENCE — 8 variants exactly as in the master
 // =============================================================================
 
-export const Default: Story = {
+export const InputLightDefault: Story = {
+  name: "Input · Light · Default",
+  args: { label: "Input title", placeholder: "Input text", required: true },
+};
+
+export const InputLightFocus: Story = {
+  name: "Input · Light · Focus (autofocus)",
   args: {
-    label: "Email",
-    placeholder: "name@example.com",
+    label: "Input title",
+    placeholder: "Input text",
+    required: true,
+    autoFocus: true,
   },
 };
 
-export const WithHelperText: Story = {
+export const InputDarkDefault: Story = {
+  name: "Input · Dark · Default",
   args: {
-    label: "Password",
-    type: "password",
-    placeholder: "••••••••",
-    helperText: "Minimum 8 characters, including 1 uppercase and 1 number.",
+    label: "Input title",
+    placeholder: "Input text",
+    required: true,
+    colorMode: "dark",
+  },
+  parameters: { backgrounds: { default: "Dark (neutral.grey-6)" } },
+};
+
+export const InputDarkFocus: Story = {
+  name: "Input · Dark · Focus (autofocus)",
+  args: {
+    label: "Input title",
+    placeholder: "Input text",
+    required: true,
+    colorMode: "dark",
+    autoFocus: true,
+  },
+  parameters: { backgrounds: { default: "Dark (neutral.grey-6)" } },
+};
+
+export const DropdownLightDefault: Story = {
+  name: "Dropdown · Light · Default",
+  args: {
+    variant: "dropdown",
+    label: "Input dropdown title",
+    placeholder: "Input text",
+    required: true,
   },
 };
 
-export const Completed: Story = {
+export const DropdownLightFocus: Story = {
+  name: "Dropdown · Light · Focus",
   args: {
-    label: "Email",
-    defaultValue: "rachel.lacroix@labster.io",
-    helperText: "We will send your sign-in link to this address.",
+    variant: "dropdown",
+    label: "Input dropdown title",
+    placeholder: "Input text",
+    required: true,
+    autoFocus: true,
   },
 };
+
+export const SearchLightDefault: Story = {
+  name: "Search · Light · Default",
+  args: {
+    variant: "search",
+    label: "Input search title",
+    placeholder: "Search Input",
+    required: true,
+  },
+};
+
+export const SearchLightFocus: Story = {
+  name: "Search · Light · Focus",
+  args: {
+    variant: "search",
+    label: "Input search title",
+    placeholder: "Search text",
+    required: true,
+    autoFocus: true,
+  },
+};
+
+// =============================================================================
+// LABSTER EXTENSIONS (error / disabled / read-only)
+// =============================================================================
 
 export const ErrorState: Story = {
   args: {
     label: "Email",
+    placeholder: "name@example.com",
+    required: true,
     defaultValue: "rachel.lacroix",
-    errorMessage:
-      "Email format is incorrect — example: name@example.com",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "state=error is CREATED FOR LABSTER (border `semantic.danger`, alert-circle icon, error message in danger). Triggered by `errorMessage` prop.",
-      },
-    },
+    errorMessage: "Email format is incorrect — example: name@example.com",
   },
 };
 
 export const Disabled: Story = {
   args: {
-    label: "Email",
-    defaultValue: "Locked field",
+    label: "Disabled field",
+    placeholder: "Locked",
     disabled: true,
-    helperText: "This field is disabled because authentication is required first.",
+    helperText: "Authentification required first.",
   },
 };
 
@@ -123,88 +172,84 @@ export const ReadOnly: Story = {
 };
 
 // =============================================================================
-// SIZES
+// MATRIX — all 8 Figma variants in one view
 // =============================================================================
 
-export const SizeDefault: Story = {
-  args: {
-    label: "Default (40px height)",
-    placeholder: "Default size",
-    size: "default",
-  },
-};
-
-export const SizeSmall: Story = {
-  args: {
-    label: "Small (32px height)",
-    placeholder: "Compact contexts",
-    size: "small",
-  },
-};
-
-// =============================================================================
-// LABEL PLACEMENT
-// =============================================================================
-
-export const LabelInlineLeft: Story = {
-  args: {
-    label: "Width",
-    labelPlacement: "inline-left",
-    size: "small",
-    defaultValue: "100%",
-  },
-  parameters: {
-    docs: {
-      description: {
-        story:
-          "Label rendered to the left of the field (84px right-aligned). Used in dense forms like settings or preferences.",
-      },
-    },
-  },
-};
-
-// =============================================================================
-// WITH ICONS
-// =============================================================================
-
-const SearchIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 16 16"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-  >
-    <circle cx="7" cy="7" r="5" stroke="currentColor" strokeWidth="1.5" />
-    <path d="M11 11L14 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-  </svg>
-);
-
-export const WithIconPrefix: Story = {
-  args: {
-    label: "Search",
-    placeholder: "Search components, tokens, patterns…",
-    iconPrefix: <SearchIcon />,
-  },
-};
-
-// =============================================================================
-// ALL STATES MATRIX (visual reference)
-// =============================================================================
-
-export const AllStates: Story = {
+export const FigmaMatrix: Story = {
+  name: "📐 Figma matrix (3 types × 2 colorModes × 2 states)",
+  decorators: [(Story) => <Story />],
   render: () => (
-    <div className="flex flex-col gap-6 p-4 w-[420px]">
-      <Input label="Default" placeholder="Type here…" />
-      <Input label="With value" defaultValue="rachel.lacroix@labster.io" />
-      <Input
-        label="Error"
-        defaultValue="rachel.lacroix"
-        errorMessage="Email format is incorrect — example: name@example.com"
-      />
-      <Input label="Disabled" defaultValue="Locked" disabled />
-      <Input label="Read-only" defaultValue="LAB-2026-0042" readOnly />
+    <div className="p-8 font-labster space-y-8">
+      <section>
+        <h3 className="text-h5 text-neutral-grey-6 mb-4">Type = input</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <Input label="Input title" placeholder="Input text" required />
+          <Input
+            label="Input title"
+            placeholder="Input text"
+            required
+            autoFocus
+          />
+        </div>
+      </section>
+
+      <section className="bg-neutral-grey-6 p-6 rounded-md">
+        <h3 className="text-h5 text-neutral-white mb-4">Type = input · Dark mode</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <Input
+            label="Input title"
+            placeholder="Input text"
+            required
+            colorMode="dark"
+          />
+          <Input
+            label="Input title"
+            placeholder="Input text"
+            required
+            colorMode="dark"
+            autoFocus
+          />
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-h5 text-neutral-grey-6 mb-4">Type = dropdown</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <Input
+            variant="dropdown"
+            label="Input dropdown title"
+            placeholder="Input text"
+            required
+          />
+          <Input
+            variant="dropdown"
+            label="Input dropdown title"
+            placeholder="Input text"
+            required
+            autoFocus
+          />
+        </div>
+      </section>
+
+      <section>
+        <h3 className="text-h5 text-neutral-grey-6 mb-4">Type = search</h3>
+        <div className="grid grid-cols-2 gap-6">
+          <Input
+            variant="search"
+            label="Input search title"
+            placeholder="Search Input"
+            required
+          />
+          <Input
+            variant="search"
+            label="Input search title"
+            placeholder="Search text"
+            required
+            autoFocus
+          />
+        </div>
+      </section>
     </div>
   ),
+  parameters: { layout: "fullscreen" },
 };
