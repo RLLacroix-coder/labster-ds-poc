@@ -87,55 +87,59 @@ const ILLUSTRATIONS: Record<
     figma_node_id: "2:236",
     figma_name: "illustrations-conversion",
     category: "marketing",
-    description: "Conversion funnel illustration",
+    description: "Conversion funnel illustration", available: true
   },
   fidelisation: {
     figma_node_id: "2:2545",
     figma_name: "illustrations-fidelisation",
     category: "marketing",
-    description: "Customer retention / loyalty",
+    description: "Customer retention / loyalty", available: true
   },
   "generation-traffic": {
     figma_node_id: "2:3380",
     figma_name: "illustrations-generation-traffic",
     category: "marketing",
-    description: "Traffic generation",
+    description: "Traffic generation", available: true
   },
   "innovation-readiness": {
     figma_node_id: "2:4074",
     figma_name: "illustrations-innovation-readyness",
     category: "innovation",
-    description: "Innovation readiness assessment",
+    description: "Innovation readiness assessment", available: true
   },
   workshops: {
     figma_node_id: "2:6103",
     figma_name: "illustrations-worshops",
     category: "innovation",
-    description: "Collaborative workshops",
+    description: "Collaborative workshops", available: true
   },
   "ux-ui-design": {
     figma_node_id: "2:5618",
     figma_name: "illustrations-ux-ui-design",
     category: "ux-design",
     description: "UX / UI design",
+    available: true,
   },
   "evaluation-ux": {
     figma_node_id: "2:2106",
     figma_name: "illustrations-evaluation-ux",
     category: "ux-design",
     description: "UX evaluation / usability test",
+    available: true,
   },
   "design-system": {
     figma_node_id: "2:1073",
     figma_name: "illustrations-desin-system",
     category: "ux-design",
     description: "Design system",
+    available: true,
   },
   "renfort-equipe": {
     figma_node_id: "2:5066",
     figma_name: "illustrations-renfort-equipe",
     category: "team",
     description: "Team reinforcement / staffing",
+    available: true,
   },
   "qualif-besoins": {
     figma_node_id: "2:4629",
