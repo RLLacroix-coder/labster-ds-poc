@@ -23,13 +23,16 @@
     - colors.neutral.grey-6   -> input value, title, label
     - colors.semantic.action-primary       -> Sign in button bg + focus ring + link text
     - colors.semantic.action-primary-hover -> Sign in button hover bg
-    - typography.body-medium  -> button label, input label
-    - typography.p-ui         -> input value/placeholder (size=default)
-    - typography.subtle       -> helper text
-    - typography.title-large  -> page title
+    - typography.headings.h6            -> page title (Fieldwork Geo Bold 18)
+    - typography.text_styles.label_m    -> Input label (Fieldwork Geo Bold 18)
+    - typography.text_styles.button_label -> Sign in button (Fieldwork Geo Demibold 16 ls1)
+    - typography.text_styles.button_link_label -> Forgot password link (Fieldwork Geo Demibold 16)
+    - typography.paragraphs.small       -> placeholder, value, helper text (Fieldwork Geo Regular 14/18)
     - shapes.radius.sm        -> button + input radius
     - shapes.radius.md        -> form container radius
     - elevation.medium        -> form container shadow
+
+  V0.3 correction : typo Labster = Fieldwork (pas Barlow). Re-extraction sur Type scale Web (nodeId 0:6886).
 
   Garde-fous respectés :
     - Aucun hex hardcodé : tous via CSS custom property
@@ -48,10 +51,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sign in — Labster</title>
 
-  <!-- Barlow font (Labster primary family) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!--
+    Fieldwork (Labster primary family) is a commercial font not freely
+    distributed via Google Fonts. For local dev, you'd need a Labster license.
+    Fallback : system-ui + safe sans-serif stack — preserves the layout structure
+    so visual review works without the actual font file. Replace with a self-hosted
+    Fieldwork @font-face declaration in production.
+  -->
 
   <style>
     /* =====================================================================
@@ -74,14 +80,19 @@
       --color-semantic-danger: #ef4c59;
       --color-semantic-danger-hover: #e04854;
 
-      /* Typography — family */
-      --font-family-primary: "Barlow", system-ui, -apple-system, sans-serif;
+      /* Typography — family (Labster: Fieldwork. Fallback to system stack for the POC.) */
+      --font-family-primary: "Fieldwork", system-ui, -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
 
-      /* Typography — style aliases */
-      --font-title-large: 600 18px/28px var(--font-family-primary);
-      --font-body-medium: 500 14px/24px var(--font-family-primary);
-      --font-p-ui: 400 16px/24px var(--font-family-primary);
-      --font-subtle: 400 14px/20px var(--font-family-primary);
+      /* Typography — Labster UI Design styles (Geo = sans, Hum = italic for quotes) */
+      /* Headings */
+      --font-h6: 700 18px/1 var(--font-family-primary);
+      /* Text styles */
+      --font-label-m: 700 18px/1 var(--font-family-primary);
+      --font-button-label: 600 16px/1 var(--font-family-primary);  /* letter-spacing 1px applied separately */
+      --font-button-link-label: 600 16px/1 var(--font-family-primary);
+      /* Paragraphs */
+      --font-paragraph-small: 400 14px/18px var(--font-family-primary);
+      --font-paragraph-small-semibold: 700 14px/18px var(--font-family-primary);
 
       /* Shapes — radius */
       --radius-sm: 6px;
@@ -139,13 +150,13 @@
     }
 
     .login-card__title {
-      font: var(--font-title-large);
+      font: var(--font-h6);
       color: var(--color-neutral-grey-6);
       margin: 0;
     }
 
     .login-card__description {
-      font: var(--font-subtle);
+      font: var(--font-paragraph-small);
       color: var(--color-neutral-grey-3);
       margin: 0;
     }
@@ -161,7 +172,7 @@
     }
 
     .ds-input__label {
-      font: var(--font-body-medium);
+      font: var(--font-label-m);
       color: var(--color-neutral-grey-6);
     }
 
@@ -171,7 +182,7 @@
       background-color: var(--color-neutral-white);
       border: 1px solid var(--color-neutral-grey-2);
       border-radius: var(--radius-sm);
-      font: var(--font-p-ui);
+      font: var(--font-paragraph-small);
       color: var(--color-neutral-grey-6);
       outline: none;
       transition: border-color 120ms ease, box-shadow 120ms ease;
@@ -188,7 +199,7 @@
     }
 
     .ds-input__helper {
-      font: var(--font-subtle);
+      font: var(--font-paragraph-small);
       color: var(--color-neutral-grey-3);
     }
 
@@ -203,7 +214,8 @@
       gap: var(--space-2);
       padding: var(--space-2) var(--space-4);
       border-radius: var(--radius-sm);
-      font: var(--font-body-medium);
+      font: var(--font-button-label);
+      letter-spacing: 1px; /* per UI Design Labster/Texts Styles/Button Label */
       cursor: pointer;
       border: none;
       transition: background-color 120ms ease, color 120ms ease;
@@ -238,6 +250,8 @@
       padding: 0;
       width: auto;
       text-decoration: none;
+      font: var(--font-button-link-label);
+      letter-spacing: 0.12px; /* per UI Design Labster/Texts Styles/Button Link Label */
     }
 
     .ds-button--link:hover {
@@ -249,7 +263,7 @@
        ===================================================================== */
     .login-card__footer {
       text-align: center;
-      font: var(--font-subtle);
+      font: var(--font-paragraph-small);
       color: var(--color-neutral-grey-3);
     }
   </style>

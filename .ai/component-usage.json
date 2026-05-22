@@ -1,5 +1,5 @@
 {
-  "$schema": "labster-ds-component-usage-v1",
+  "schema_name": "labster-ds-component-usage-v1",
   "version": "V0.1",
   "generated_at": "2026-05-22",
   "description": "Relations source -> target between Labster DS components. Used to answer Report queries like 'where is X used?' or 'what does Y contain?'.",

@@ -1,5 +1,5 @@
 {
-  "$schema": "labster-ds-design-tokens-v1",
+  "schema_name": "labster-ds-design-tokens-v1",
   "version": "V0.1",
   "generated_at": "2026-05-22",
   "description": "Index of design tokens consumed by each Labster DS component. Used to answer Report queries like 'what tokens does X consume?' or 'where is token Y used?'. Tokens use DTCG dot-path notation; values are sourced from the Labster Tokens Figma styles (no Figma Variables available).",
@@ -26,11 +26,24 @@
       "neutral.grey-6": "#0E2946"
     },
     "typography": {
-      "title-large": "Barlow Semi Bold 18/28",
-      "body-medium": "Barlow Medium 14/24",
-      "p-ui": "Barlow Regular 16/24",
-      "subtle": "Barlow Regular 14/20",
-      "label-inline": "Barlow Medium 14/14"
+      "family.primary": "Fieldwork",
+      "headings.h1": "Fieldwork Geo Bold 64/72/0",
+      "headings.h2": "Fieldwork Geo Bold 56/62/0",
+      "headings.h3": "Fieldwork Geo Bold 40/44/0",
+      "headings.h4": "Fieldwork Geo Bold 32/32/0.5",
+      "headings.h5": "Fieldwork Geo Bold 24/auto/0",
+      "headings.h6": "Fieldwork Geo Bold 18/auto/0",
+      "paragraphs.small": "Fieldwork Geo Regular 14/18/0",
+      "paragraphs.small_semibold": "Fieldwork Geo Bold 14/18/0",
+      "paragraphs.medium": "Fieldwork Geo Light 20/24/0",
+      "paragraphs.medium_semibold": "Fieldwork Geo Bold 20/24/0",
+      "paragraphs.large": "Fieldwork Geo Light 32/44/0",
+      "paragraphs.large_semibold": "Fieldwork Geo Bold 32/44/0",
+      "text_styles.label_m": "Fieldwork Geo Bold 18/auto/0",
+      "text_styles.button_label": "Fieldwork Geo Demibold 16/auto/1",
+      "text_styles.button_link_label": "Fieldwork Geo Demibold 16/auto/0.12",
+      "text_styles.button_scroll_label": "Fieldwork Geo Bold 12/auto/1 uppercase",
+      "text_styles.links": "Fieldwork Geo Regular 14/auto/0.5"
     },
     "elevation": {
       "small": "0 2px 8px 0 rgba(0, 46, 70, 0.1)",
@@ -57,7 +70,7 @@
         { "path": "colors.neutral.grey-1", "usage_context": "secondary border default" },
         { "path": "colors.neutral.grey-2", "usage_context": "secondary border hover, disabled background" },
         { "path": "colors.neutral.grey-6", "usage_context": "secondary/ghost text, icon" },
-        { "path": "typography.body-medium", "usage_context": "button label" },
+        { "path": "typography.text_styles.button_label", "usage_context": "button label" },
         { "path": "shapes.radius.sm", "usage_context": "default + icon-only-square radius" },
         { "path": "shapes.radius.pill", "usage_context": "icon-only-circle radius" }
       ]
@@ -74,9 +87,9 @@
         { "path": "colors.semantic.danger", "usage_context": "border error, error message text, alert-circle icon" },
         { "path": "colors.semantic.action-primary", "usage_context": "focus ring (outer 2px)" },
         { "path": "colors.brand.red-light", "usage_context": "error variant background (optional, for critical errors)" },
-        { "path": "typography.body-medium", "usage_context": "label" },
-        { "path": "typography.p-ui", "usage_context": "value/placeholder for size=default" },
-        { "path": "typography.subtle", "usage_context": "value/placeholder for size=small, helper text, error message" },
+        { "path": "typography.text_styles.label_m", "usage_context": "Input label (above field, inline-left)" },
+        { "path": "typography.paragraphs.small", "usage_context": "value/placeholder for size=default" },
+        { "path": "typography.paragraphs.small", "usage_context": "value/placeholder for size=small, helper text, error message" },
         { "path": "shapes.radius.sm", "usage_context": "field radius" }
       ]
     },
@@ -88,9 +101,9 @@
         { "path": "colors.neutral.grey-3", "usage_context": "description text" },
         { "path": "colors.neutral.grey-6", "usage_context": "title text, backdrop (with opacity 0.5)" },
         { "path": "colors.semantic.danger", "usage_context": "primary button color for destructive-confirmation" },
-        { "path": "typography.title-large", "usage_context": "dialog title" },
-        { "path": "typography.subtle", "usage_context": "dialog description" },
-        { "path": "typography.body-medium", "usage_context": "buttons inside (inherited from Button)" },
+        { "path": "typography.headings.h6", "usage_context": "dialog title" },
+        { "path": "typography.paragraphs.small", "usage_context": "dialog description" },
+        { "path": "typography.text_styles.button_label", "usage_context": "buttons inside (inherited from Button)" },
         { "path": "shapes.radius.md", "usage_context": "container radius" },
         { "path": "elevation.large", "usage_context": "container box-shadow" }
       ]
@@ -105,9 +118,12 @@
     "colors.neutral.grey-2": ["Button (border hover, disabled bg)", "Input (border default)"],
     "colors.neutral.grey-3": ["Input (placeholder, disabled value)", "Dialog (description)"],
     "colors.neutral.grey-6": ["Button (secondary/ghost text)", "Input (value, label)", "Dialog (title, backdrop)"],
-    "typography.body-medium": ["Button (label)", "Input (label)", "Dialog (buttons via children)"],
-    "typography.title-large": ["Dialog (title)"],
-    "typography.subtle": ["Input (size-small, helper, error)", "Dialog (description)"],
+    "typography.text_styles.button_label": ["Button (all variants except link)", "Dialog (buttons via children)"],
+    "typography.text_styles.button_link_label": ["Button (link variant)"],
+    "typography.text_styles.label_m": ["Input (label above field, inline-left)"],
+    "typography.headings.h6": ["Dialog (title)"],
+    "typography.paragraphs.small": ["Input (value, placeholder, helper, all sizes)", "Dialog (description)"],
+    "typography.paragraphs.small_semibold": ["Input (error message)"],
     "shapes.radius.sm": ["Button (default + icon-square)", "Input (field)"],
     "shapes.radius.md": ["Dialog (container)"],
     "elevation.large": ["Dialog (container shadow)"]

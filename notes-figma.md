@@ -6,10 +6,11 @@
 - État : styles legacy uniquement (Color styles, Text styles, Effect styles). Pas de Variables Figma.
 - Plan Figma Labster : Professional (publication variables bloquée — pré-requis Organization pour industrialisation cross-files).
 
-### Styles observés (à confirmer en étape 5.2)
-- Color styles : Palette, …Complements, Labster Styleguide
-- Text styles : Presentation Labster, UI Design Labster, Label
-- Effect styles : Elevation
+### Styles observés (confirmé via re-extraction sur Type scale Web 2026-05-22)
+- Color styles : Palette (Brand colors, Accent color, Greyscale, Neutral colors)
+- Text styles : Presentation Labster, **UI Design Labster** (échelle complète extraite : H1-H6, Paragraph S/M/L, Texts Styles, Quotes), Label
+- Effect styles : Elevation (Small, Medium, Large)
+- **Famille typo confirmée** : **Fieldwork** (Geo Bold/Demibold/Regular/Light + Hum italic variants) — NOT Barlow comme initialement inféré
 
 ## Shadcn UI Kit (source des composants)
 - URL : https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC

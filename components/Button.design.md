@@ -16,7 +16,7 @@ tokens:
         disabled: "{neutral.grey-2}"
       text:
         all_states: "{neutral.white}"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_label}"
       radius: "{radius.sm}"
       padding: "8px 16px"
     secondary:
@@ -30,7 +30,7 @@ tokens:
         hover: "1px solid {neutral.grey-2}"
       text:
         all_states: "{neutral.grey-6}"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_label}"
       radius: "{radius.sm}"
       padding: "8px 16px"
     ghost:
@@ -41,7 +41,7 @@ tokens:
         disabled: "transparent"
       text:
         all_states: "{neutral.grey-6}"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_label}"
       radius: "{radius.sm}"
       padding: "8px 16px"
     danger:
@@ -52,7 +52,7 @@ tokens:
         disabled: "{neutral.grey-2}"
       text:
         all_states: "{neutral.white}"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_label}"
       radius: "{radius.sm}"
       padding: "8px 16px"
       conflict_note: "Utilise brand.red — voir DESIGN.md global section 2 pour le conflit identité/sémantique"
@@ -63,7 +63,7 @@ tokens:
       text:
         default: "{semantic.action-primary}"
         hover: "{semantic.action-primary} (underline)"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_link_label}"
       padding: "8px 0"
     loading:
       description: "État pendant l'exécution d'une action — pas un variant indépendant mais un état overlay"
@@ -74,7 +74,7 @@ tokens:
     default:
       height: "40px"
       padding: "8px 16px"
-      typography: "Barlow Medium 14/24"
+      typography: "{typography.text_styles.button_label}"
     small:
       height: "32px"
       padding: "6px 12px"
@@ -103,6 +103,7 @@ tokens:
 
 > **Source Figma** : [Shadcn UI Kit / Primitives / button (master `1:85`)](https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=1-85)
 > Re-tokenisé sur les tokens Labster — voir [labster-styles-raw.md](../tokens/labster-styles-raw.md).
+> **V0.3 correction** : la typo n'est PAS Barlow (erreur d'extraction initiale) — la vraie famille Labster est **Fieldwork**, voir [DESIGN.md global §3](../DESIGN.md).
 
 ## Overview
 

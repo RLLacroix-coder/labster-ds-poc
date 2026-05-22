@@ -24,10 +24,10 @@ tokens:
       opacity: 0.5
       status: "[VARIANT CRÉÉ POUR LABSTER — n'existe pas dans Shadcn]"
     title:
-      typography: "Barlow Semi Bold 18/28"
+      typography: "{typography.headings.h6}"
       color: "{neutral.grey-6}"
     description:
-      typography: "Barlow Regular 14/20"
+      typography: "{typography.paragraphs.small}"
       color: "{neutral.grey-3}"
     button_section:
       alignment: "right (justify-end)"
@@ -63,6 +63,7 @@ tokens:
 
 > **Source Figma** : [Shadcn UI Kit / Components / dialog (master `4:329`)](https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=4-329)
 > Re-tokenisé sur les tokens Labster. **Substitution de Card** (inexistant dans le kit Shadcn) — décision documentée dans le README du POC.
+> **V0.3 correction** : typo Labster = Fieldwork. Title = `H6` (Fieldwork Geo Bold 18/auto/0), Description = `Paragraph Small` (Fieldwork Geo Regular 14/18/0), Buttons = `Button Label` / `Button Link Label` hérités du composant Button.
 
 ## Overview
 

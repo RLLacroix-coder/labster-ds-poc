@@ -86,13 +86,82 @@ tokens:
         role: "headlines principales, texte high contrast"
   typography:
     family:
-      primary: "Barlow"
+      primary: "Fieldwork"
+      figma_styles_available:
+        - "Geo Bold (weight 700)"
+        - "Geo Demibold (weight 600)"
+        - "Geo Regular (weight 400)"
+        - "Geo Light (weight 300)"
+        - "Hum DemiBold Italic (weight 500, italic)"
+        - "Hum Regular Italic (weight 400, italic)"
+        - "Hum Light Italic (weight 300, italic)"
     weights:
+      light: 300
       regular: 400
-      medium: 500
+      demibold: 600
       bold: 700
     scales:
-      status: "[ÉCHELLE PRÉCISE À EXTRAIRE — page 'Type scale Web' nodeId 0:6886 du fichier Labster]"
+      headings:
+        h1:
+          figma_style: "UI Design Labster/Headings/H1"
+          spec: "Fieldwork Geo Bold 64/72/0"
+        h2:
+          figma_style: "UI Design Labster/Headings/H2"
+          spec: "Fieldwork Geo Bold 56/62/0"
+        h3:
+          figma_style: "UI Design Labster/Headings/H3"
+          spec: "Fieldwork Geo Bold 40/44/0"
+        h4:
+          figma_style: "UI Design Labster/Headings/H4"
+          spec: "Fieldwork Geo Bold 32/32/0.5"
+        h5:
+          figma_style: "UI Design Labster/Headings/H5"
+          spec: "Fieldwork Geo Bold 24/auto/0"
+        h6:
+          figma_style: "UI Design Labster/Headings/H6"
+          spec: "Fieldwork Geo Bold 18/auto/0"
+      paragraphs:
+        small:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Small"
+          spec: "Fieldwork Geo Regular 14/18/0"
+        small_semibold:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Small Semi-bold"
+          spec: "Fieldwork Geo Bold 14/18/0"
+        medium:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Medium"
+          spec: "Fieldwork Geo Light 20/24/0"
+        medium_semibold:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Medium Semi-bold"
+          spec: "Fieldwork Geo Bold 20/24/0"
+        large:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Large"
+          spec: "Fieldwork Geo Light 32/44/0"
+        large_semibold:
+          figma_style: "UI Design Labster/Quotes/Paragraphs/Large Semi-bold"
+          spec: "Fieldwork Geo Bold 32/44/0"
+      text_styles:
+        label_m:
+          figma_style: "UI Design Labster/Texts Styles/Label M"
+          spec: "Fieldwork Geo Bold 18/auto/0"
+          usage: "Input labels (above), section labels"
+        button_label:
+          figma_style: "UI Design Labster/Texts Styles/Button Label"
+          spec: "Fieldwork Geo Demibold 16/auto/1"
+          usage: "Button text (all variants except link)"
+        button_link_label:
+          figma_style: "UI Design Labster/Texts Styles/Button Link Label"
+          spec: "Fieldwork Geo Demibold 16/auto/0.12"
+          usage: "Button variant=link text"
+        button_scroll_label:
+          figma_style: "UI Design Labster/Texts Styles/Button Scroll Label"
+          spec: "Fieldwork Geo Bold 12/auto/1 uppercase"
+          usage: "Scroll-down indicators, micro-CTAs"
+        links:
+          figma_style: "UI Design Labster/Texts Styles/Links"
+          spec: "Fieldwork Geo Regular 14/auto/0.5"
+          usage: "Inline text links, navigation"
+      quotes:
+        status: "Available (italic variants Fieldwork Hum) but not used by Button/Input/Dialog of this POC"
   elevation:
     small:
       figma_style: "Elevation/Small"
@@ -182,22 +251,54 @@ Vérifications à valider à l'étape Accessibilité de chaque DESIGN.md composa
 
 ## 3. Typography
 
-**Famille principale** : **Barlow** (Regular, Medium, Bold).
+**Famille principale** : **Fieldwork** (confirmé par re-extraction 2026-05-22 via Type scale Web nodeId 0:6886).
 
-L'échelle exacte des styles `Presentation Labster`, `UI Design Labster`, `Label` n'a pas été extraite en détail à l'étape 5. Elle sera lue à la demande lors de la génération d'un composant qui en a besoin (étape 6 ou 7 si nécessaire).
+> **Correction V0.3 / Finding** : l'inventaire initial avait extrait "Barlow" depuis la frame Color palette du styleguide. C'était une erreur — Barlow est utilisée pour les **titres internes du styleguide** ("Color Palette", "SUB Section title"), pas pour le DS Labster. La vraie famille Labster est **Fieldwork** (échelle UI Design Labster).
 
-> **Action requise** : pour passer à un DS Labster production-ready, extraire l'échelle exacte des Type scale Web et Type scale Presentation, et la documenter en tokens DTCG.
+### Styles Fieldwork disponibles
 
-### Conventions observées (POC)
+- **Geo Bold** (weight 700) — Headings, paragraphs semi-bold, Label M, Button Scroll Label
+- **Geo Demibold** (weight 600) — Button Label, Button Link Label
+- **Geo Regular** (weight 400) — Paragraph Small, Links
+- **Geo Light** (weight 300) — Paragraph Medium, Paragraph Large
+- **Hum DemiBold Italic / Hum Regular Italic / Hum Light Italic** — Quotes (non utilisé par Button/Input/Dialog du POC)
 
-Pour les 3 composants documentés à l'étape 6, on utilise :
-- **Body medium** : Barlow Medium 14/24 (texte de bouton, label, input value)
-- **Body small** : Barlow Regular 14/20 (helper text, description)
-- **Body large** : Barlow Regular 16/24 (input value en taille default)
-- **Title large** : Barlow Semi Bold 18/28 (titre de dialog)
-- **Label inline** : Barlow Medium 14/14 (label de form inline)
+### Échelle complète (depuis UI Design Labster)
 
-Ces conventions sont **dérivées de Shadcn** et flaggées `[À RECONFIRMER]` quand l'échelle Labster sera extraite.
+#### Headings
+| Style Labster | Spec | Usage POC |
+|---|---|---|
+| H1 | Fieldwork Geo Bold 64/72/0 | Display titles |
+| H2 | Fieldwork Geo Bold 56/62/0 | Section titles |
+| H3 | Fieldwork Geo Bold 40/44/0 | Sub-section titles |
+| H4 | Fieldwork Geo Bold 32/32/letterSpacing 0.5 | Card titles |
+| H5 | Fieldwork Geo Bold 24/auto/0 | Inline strong titles |
+| H6 | Fieldwork Geo Bold 18/auto/0 | Dialog title (POC mapping) |
+
+#### Paragraphs
+| Style Labster | Spec | Usage POC |
+|---|---|---|
+| Paragraph Small | Fieldwork Geo Regular 14/18/0 | Input value/placeholder, helper text, description |
+| Paragraph Small Semi-bold | Fieldwork Geo Bold 14/18/0 | Error messages (with `semantic.danger` color) |
+| Paragraph Medium | Fieldwork Geo Light 20/24/0 | Body emphasis |
+| Paragraph Medium Semi-bold | Fieldwork Geo Bold 20/24/0 | Body emphasis bold |
+| Paragraph Large | Fieldwork Geo Light 32/44/0 | Marketing copy |
+| Paragraph Large Semi-bold | Fieldwork Geo Bold 32/44/0 | Marketing copy bold |
+
+#### Text styles
+| Style Labster | Spec | Usage POC |
+|---|---|---|
+| Label M | Fieldwork Geo Bold 18/auto/0 | Input labels above field, section labels |
+| Button Label | Fieldwork Geo Demibold 16/auto/letterSpacing 1 | Button text (primary, secondary, ghost, danger) |
+| Button Link Label | Fieldwork Geo Demibold 16/auto/letterSpacing 0.12 | Button variant=link |
+| Button Scroll Label | Fieldwork Geo Bold 12/auto/letterSpacing 1 uppercase | Scroll-down indicators |
+| Links | Fieldwork Geo Regular 14/auto/letterSpacing 0.5 | Inline navigation links |
+
+### Notes
+
+- **lineHeight "auto"** : observé dans Figma (valeur 100 = 100% interprétation probable). À valider en CSS production.
+- **Aucun token typographique manquant** pour les 3 composants du POC après cette extraction.
+- L'ancienne nomenclature `body-medium`, `title-large`, `p-ui`, `subtle`, `label-inline` (inventée pendant V0.1) est remplacée par les vrais noms Labster (`Button Label`, `H6`, `Paragraph Small`, `Label M`).
 
 ## 4. Layout
 

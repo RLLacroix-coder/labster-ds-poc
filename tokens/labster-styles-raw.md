@@ -83,19 +83,64 @@ Conversion vers `tokens/labster-tokens.json` (format DTCG W3C) à l'étape 6.
 
 ## Typographie
 
-### Famille principale détectée
+> **Correction 2026-05-22** : la première extraction (sur frame "Color palette") avait identifié "Barlow" comme famille principale. C'était une **erreur d'inférence** — Barlow est utilisée pour les titres internes du styleguide (les labels "Color Palette", "Section title"), pas pour le DS Labster. Re-extraction sur frame "Type scale Web" (nodeId `0:6886`) a révélé la vraie typo : **Fieldwork**.
 
-| Famille | Variantes observées | Source |
+### Famille principale
+
+**Fieldwork** — famille variable Labster avec sous-familles "Geo" (sans serif) et "Hum" (humaniste italique pour quotes).
+
+### Styles Fieldwork disponibles
+
+| Style | Weight | Usage |
 |---|---|---|
-| **Barlow** | Bold, Medium, Regular | Page Color palette + frames Type scale |
+| Fieldwork Geo Bold | 700 | Headings (H1-H6), Paragraph Semi-bold, Label M, Button Scroll |
+| Fieldwork Geo Demibold | 600 | Button Label, Button Link Label |
+| Fieldwork Geo Regular | 400 | Paragraph Small, Links |
+| Fieldwork Geo Light | 300 | Paragraph Medium, Paragraph Large |
+| Fieldwork Hum DemiBold Italic | 500 italic | Quotes Small |
+| Fieldwork Hum Regular Italic | 400 italic | Quotes Medium |
+| Fieldwork Hum Light Italic | 300 italic | Quotes Large |
 
-> Échantillon observé sur la frame Color palette uniquement. Les **tailles exactes** des styles `Presentation Labster`, `UI Design Labster`, `Label` (vu en panneau Styles dans le screenshot du fichier Figma) n'ont pas encore été extraites — à faire à l'étape 6 via un get_design_context ciblé sur "Type scale Web" (nodeId `0:6886`) si besoin précis.
+### Échelle UI Design Labster — Headings
 
-### Hypothèses à valider à l'étape 6
+| Style Labster | Spec |
+|---|---|
+| `UI Design Labster/Headings/H1` | Fieldwork Geo Bold, 64 / 72 / 0 |
+| `UI Design Labster/Headings/H2` | Fieldwork Geo Bold, 56 / 62 / 0 |
+| `UI Design Labster/Headings/H3` | Fieldwork Geo Bold, 40 / 44 / 0 |
+| `UI Design Labster/Headings/H4` | Fieldwork Geo Bold, 32 / 32 / letterSpacing 0.5 |
+| `UI Design Labster/Headings/H5` | Fieldwork Geo Bold, 24 / auto / 0 |
+| `UI Design Labster/Headings/H6` | Fieldwork Geo Bold, 18 / auto / 0 |
 
-- `Presentation Labster` = échelle typo pour les slides / présentations (Type scale Presentation)
-- `UI Design Labster` = échelle typo pour le web / UI (Type scale Web)
-- `Label` = micro-typo pour labels de formulaires
+### Échelle UI Design Labster — Paragraphs
+
+| Style Labster | Spec |
+|---|---|
+| `UI Design Labster/Quotes/Paragraphs/Small` | Fieldwork Geo Regular, 14 / 18 / 0 |
+| `UI Design Labster/Quotes/Paragraphs/Small Semi-bold` | Fieldwork Geo Bold, 14 / 18 / 0 |
+| `UI Design Labster/Quotes/Paragraphs/Medium` | Fieldwork Geo Light, 20 / 24 / 0 |
+| `UI Design Labster/Quotes/Paragraphs/Medium Semi-bold` | Fieldwork Geo Bold, 20 / 24 / 0 |
+| `UI Design Labster/Quotes/Paragraphs/Large` | Fieldwork Geo Light, 32 / 44 / 0 |
+| `UI Design Labster/Quotes/Paragraphs/Large Semi-bold` | Fieldwork Geo Bold, 32 / 44 / 0 |
+
+### Échelle UI Design Labster — Text Styles
+
+| Style Labster | Spec |
+|---|---|
+| `UI Design Labster/Texts Styles/Label M` | Fieldwork Geo Bold, 18 / auto / 0 |
+| `UI Design Labster/Texts Styles/Button Label` | Fieldwork Geo Demibold, 16 / auto / letterSpacing 1 |
+| `UI Design Labster/Texts Styles/Button Link Label` | Fieldwork Geo Demibold, 16 / auto / letterSpacing 0.12 |
+| `UI Design Labster/Texts Styles/Button Scroll Label` | Fieldwork Geo Bold, 12 / auto / letterSpacing 1 uppercase |
+| `UI Design Labster/Texts Styles/Button Scroll Label Hover` | Fieldwork Geo Bold, 12 / auto / letterSpacing 3 uppercase |
+| `UI Design Labster/Texts Styles/Links` | Fieldwork Geo Regular, 14 / auto / letterSpacing 0.5 |
+
+### Quotes (italiques, non utilisés par Button/Input/Dialog du POC)
+
+| Style Labster | Spec |
+|---|---|
+| `UI Design Labster/Quotes/Small` | Fieldwork Hum DemiBold Italic, 16 / 40 / 0 |
+| `UI Design Labster/Quotes/Medium` | Fieldwork Hum Regular Italic, 24 / 40 / 0 |
+| `UI Design Labster/Quotes/Large` | Fieldwork Hum Light Italic, 36 / 40 / 0 |
 
 ---
 
@@ -123,8 +168,9 @@ Conversion vers `tokens/labster-tokens.json` (format DTCG W3C) à l'étape 6.
 
 ## Limites assumées de cet inventaire
 
-- Les **tailles typo exactes** ne sont pas extraites (à faire à l'étape 6 si besoin).
+- ✅ **Typographie** : extraction complète après correction Fieldwork (re-extraction sur Type scale Web, 2026-05-22).
 - Les **icônes Labster** (page Icons du styleguide) ne sont pas inventoriées (hors scope POC 3 composants).
 - Les **pictos Labster** (page Pictos) ne sont pas inventoriés.
 - Le **logo Labster** n'est pas inventorié.
-- L'extraction repose sur un seul get_design_context (sur Color palette) qui a réussi à exposer l'intégralité des styles utilisés. Si certains styles ne sont consommés que sur d'autres pages (ex : un style "Disabled" qui n'apparaîtrait que dans des composants de formulaire), ils sont absents de cet inventaire. À cross-check si suspicion.
+- L'extraction des couleurs repose sur un get_design_context (sur Color palette). Si certaines couleurs ne sont consommées que sur d'autres pages, elles sont absentes de cet inventaire. À cross-check si suspicion.
+- **Finding méthodologique critique 2026-05-22** : l'extraction de tokens via observation d'une frame n'expose QUE les styles UTILISÉS dans cette frame, pas l'ensemble des styles définis. Pour la typographie, cibler la frame "Type scale Web" (ou équivalent canonical du styleguide) — pas une frame quelconque. Sinon, on extrait la typo *des labels de la frame*, pas la typo *du DS*.

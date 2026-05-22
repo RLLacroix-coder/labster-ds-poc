@@ -1,5 +1,5 @@
 {
-  "$schema": "labster-ds-index-v1",
+  "schema_name": "labster-ds-index-v1",
   "version": "V0.1",
   "generated_at": "2026-05-22",
   "generated_by": "POC manual generation (étape 8 tutoriel)",

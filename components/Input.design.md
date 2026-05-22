@@ -21,15 +21,15 @@ tokens:
         value: "{neutral.grey-6}"
         disabled: "{neutral.grey-3}"
       typography:
-        label: "Barlow Medium 14/20"
-        placeholder_value: "Barlow Regular 16/24"
-        helper: "Barlow Regular 14/20"
+        label: "{typography.text_styles.label_m}"
+        placeholder_value: "{typography.paragraphs.small}"
+        helper: "{typography.paragraphs.small}"
       radius: "{radius.sm}"
       padding: "8px 12px"
     small:
       description: "Input compact, contextes denses"
       typography:
-        placeholder_value: "Barlow Regular 14/20"
+        placeholder_value: "{typography.paragraphs.small}"
       padding: "6px 10px"
       height: "32px"
     label_inline:
@@ -56,6 +56,7 @@ tokens:
 
 > **Source Figma** : [Shadcn UI Kit / Primitives / input (master `2:285`)](https://www.figma.com/design/tPwrOV9EX9jLXuxsBskINR/01-Shadcn-Kit-POC?node-id=2-285)
 > Re-tokenisé sur les tokens Labster.
+> **V0.3 correction** : typo Labster = Fieldwork (pas Barlow). Mapping : label = `Label M` (Fieldwork Geo Bold 18), value/placeholder/helper = `Paragraph Small` (Fieldwork Geo Regular 14/18), error message = `Paragraph Small Semi-bold` en `semantic.danger`.
 
 ## Overview
 
