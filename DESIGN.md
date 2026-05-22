@@ -34,19 +34,26 @@ tokens:
     semantic:
       action-primary:
         value: "{colors.brand.blue}"
-        role: "boutons primaires, liens d'action"
+        role: "boutons primaires, liens d'action, focus rings"
       action-primary-hover:
         value: "#3A57BC"
         role: "boutons primaires en hover"
         status: "[TOKEN À CONFIRMER — dérivé de blue, non observé dans le styleguide]"
-      danger:
+      accent-cta:
         value: "{colors.brand.red}"
         figma_style: "Palette/Accent color/default"
-        role: "actions destructives, états error"
-        conflict_note: "Conflit identité/sémantique avec Brand Red. À documenter."
-      danger-hover:
+        role: "CTA brand sur fonds sombres (ex: 'Envoyer' sur le formulaire contact Labster). USAGE POSITIF, pas destructif."
+        added_in: "V0.5 (2026-05-22) — observé sur labster.io contact form"
+      accent-cta-hover:
         value: "#E04854"
         figma_style: "Palette/Accent color/hover"
+      danger:
+        value: "{colors.brand.red}"
+        figma_style: "Palette/Accent color/default (same hex, distinct semantic)"
+        role: "états d'erreur (Input error, alert messages, Button destructive). USAGE NÉGATIF."
+        usage_distinction: "Distinct de accent-cta par le contexte UI, pas par la valeur. Voir DESIGN.md §10 Do's and Don'ts."
+      danger-hover:
+        value: "#E04854"
       success:
         status: "[TOKEN MANQUANT — à définir dans le DS Labster]"
       warning:
@@ -219,14 +226,23 @@ Chaque couleur brand a une version pastel :
 
 | Token | Référence | Usage |
 |---|---|---|
-| `semantic.action-primary` | → `brand.blue` | Boutons primaires, liens, sélection |
+| `semantic.action-primary` | → `brand.blue` | Boutons primaires (light bg), liens, focus rings |
 | `semantic.action-primary-hover` | `#3A57BC` `[À CONFIRMER]` | Hover sur action principale |
-| `semantic.danger` | → `brand.red` (= `Accent color/default`) | Boutons destructifs, états error |
+| `semantic.accent-cta` | → `brand.red` (= `Accent color/default`) | **CTA positifs sur dark bg** (ex : "Envoyer" sur le formulaire contact Labster). Pill rounded recommandé. |
+| `semantic.accent-cta-hover` | → `Accent color/hover` `#E04854` | Hover sur accent CTA |
+| `semantic.danger` | → `brand.red` (même valeur que accent-cta, contexte distinct) | **États d'erreur** (Input error border, alert messages, Button destructive) |
 | `semantic.danger-hover` | → `Accent color/hover` `#E04854` | Hover sur action destructive |
 | `semantic.warning` | → `brand.yellow` | États d'avertissement |
 | `semantic.success` | `[MANQUANT]` | À définir |
 
-> **⚠ Conflit identité/sémantique** : `brand.red` et `semantic.danger` pointent vers la même valeur. Conséquence : un badge "Red brand" et un message d'erreur partagent visuellement la même couleur, ce qui peut nuire à la lisibilité sémantique. **Recommandation pour l'équipe Labster** : créer un `semantic.danger` distinct (rouge plus saturé / plus orangé) au prochain itération du DS. Pour le POC, on assume la coexistence.
+> **🔑 Multi-rôle du rouge brand (V0.5 finding)** : `brand.red` `#EF4C59` a **deux rôles sémantiques légitimes**, distingués par le contexte d'usage, pas par la valeur :
+>
+> 1. **`semantic.accent-cta`** — usage POSITIF, CTA brand sur fonds sombres. Pattern observé sur labster.io (bouton "Envoyer" du formulaire contact, pill rounded white text).
+> 2. **`semantic.danger`** — usage NÉGATIF, état d'erreur ou action destructive (Input error border, Button "Delete").
+>
+> Le mapping V0.1 → V0.4 traitait `brand.red` comme uniquement `semantic.danger`, ce qui était **incomplet**. La V0.5 ajoute le rôle `accent-cta`.
+>
+> **Cohérence visuelle** : le contexte (background sombre vs light, libellé positif "Envoyer" vs négatif "Delete", forme pill rounded vs standard radius) garantit que l'utilisateur ne confonde pas les 2 rôles. À la lecture du DS, ce sont 2 tokens sémantiques distincts qui partagent une valeur source — pas une ambiguïté.
 
 ### Palette neutre
 

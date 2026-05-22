@@ -52,7 +52,7 @@ export const metadata: ComponentMetadata = {
     {
       name: "danger",
       description:
-        "Destructive irreversible action (delete, revoke). Must be paired with a confirmation dialog. Note: uses brand red, see DESIGN.md global section 2 for identity/semantic conflict.",
+        "Destructive irreversible action (delete, revoke). Must be paired with a confirmation dialog. Uses brand red via the `semantic.danger` token (negative role).",
       tokens_consumed: [
         "colors.semantic.danger",
         "colors.semantic.danger-hover",
@@ -60,6 +60,20 @@ export const metadata: ComponentMetadata = {
         "colors.neutral.grey-2",
         "typography.text_styles.button_label",
         "shapes.radius.sm",
+      ],
+      status: "stable",
+    },
+    {
+      name: "accent-cta",
+      description:
+        "Brand red CTA on dark backgrounds. Positive call-to-action (e.g. 'Envoyer' on Labster contact form). Pill rounded, generous padding. Uses brand red via the `semantic.accent-cta` token (positive role) — distinct from `danger` despite shared source value.",
+      tokens_consumed: [
+        "colors.semantic.accent-cta",
+        "colors.semantic.accent-cta-hover",
+        "colors.neutral.white",
+        "colors.neutral.grey-2",
+        "typography.text_styles.button_label",
+        "shapes.radius.pill",
       ],
       status: "stable",
     },
@@ -118,10 +132,10 @@ export const metadata: ComponentMetadata = {
   props: [
     {
       name: "variant",
-      type: "'primary' | 'secondary' | 'ghost' | 'danger' | 'link'",
+      type: "'primary' | 'secondary' | 'ghost' | 'danger' | 'accent-cta' | 'link'",
       required: false,
       default: "'primary'",
-      description: "Visual variant of the button.",
+      description: "Visual variant of the button. `accent-cta` is the brand red CTA on dark backgrounds (positive use); `danger` is the brand red for destructive actions (negative use).",
     },
     {
       name: "size",
@@ -179,12 +193,15 @@ export const metadata: ComponentMetadata = {
     "colors.semantic.action-primary-hover",
     "colors.semantic.danger",
     "colors.semantic.danger-hover",
+    "colors.semantic.accent-cta",
+    "colors.semantic.accent-cta-hover",
     "colors.neutral.white",
     "colors.neutral.smoke",
     "colors.neutral.grey-1",
     "colors.neutral.grey-2",
     "colors.neutral.grey-6",
     "typography.text_styles.button_label",
+    "typography.text_styles.button_link_label",
     "shapes.radius.sm",
     "shapes.radius.pill",
   ],

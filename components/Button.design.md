@@ -45,7 +45,7 @@ tokens:
       radius: "{radius.sm}"
       padding: "8px 16px"
     danger:
-      description: "Action destructive, irréversible"
+      description: "Action destructive, irréversible. Usage NÉGATIF du rouge brand."
       background:
         default: "{semantic.danger}"
         hover: "{semantic.danger-hover}"
@@ -55,7 +55,20 @@ tokens:
       typography: "{typography.text_styles.button_label}"
       radius: "{radius.sm}"
       padding: "8px 16px"
-      conflict_note: "Utilise brand.red — voir DESIGN.md global section 2 pour le conflit identité/sémantique"
+      multi_role_note: "Utilise brand.red mais via le token sémantique `danger`. Distinct du variant `accent-cta` qui utilise la même valeur source pour un usage POSITIF."
+    accent-cta:
+      description: "CTA brand sur fonds sombres. Usage POSITIF du rouge brand (ex: 'Envoyer' sur le formulaire contact Labster)."
+      background:
+        default: "{semantic.accent-cta}"
+        hover: "{semantic.accent-cta-hover}"
+        disabled: "{neutral.grey-2}"
+      text:
+        all_states: "{neutral.white}"
+      typography: "{typography.text_styles.button_label}"
+      radius: "{radius.pill}"
+      padding: "12px 32px"
+      design_note: "Pill rounded (radius.pill) et padding plus généreux que les autres variants. Pattern observé sur labster.io. Distinguer visuellement de `danger` qui utilise radius.sm standard."
+      added_in: "V0.5 (2026-05-22)"
     link:
       description: "Action navigationnelle, ressemble à un lien inline"
       background:

@@ -13,6 +13,8 @@
       "brand.yellow-light": "#FFECB8",
       "semantic.action-primary": "#476AE3",
       "semantic.action-primary-hover": "#3A57BC",
+      "semantic.accent-cta": "#EF4C59",
+      "semantic.accent-cta-hover": "#E04854",
       "semantic.danger": "#EF4C59",
       "semantic.danger-hover": "#E04854",
       "semantic.warning": "#FFC31D",
@@ -111,6 +113,7 @@
   ],
   "token_to_components": {
     "colors.semantic.action-primary": ["Button (primary bg)", "Input (focus ring)", "Dialog (via Button primary children)"],
+    "colors.semantic.accent-cta": ["Button (accent-cta bg)", "Pattern: contact form Envoyer CTA on dark bg"],
     "colors.semantic.danger": ["Button (danger bg)", "Input (state=error)", "Dialog (destructive-confirmation via Button danger)"],
     "colors.neutral.white": ["Button (secondary bg, text on dark)", "Input (field bg)", "Dialog (container bg)"],
     "colors.neutral.smoke": ["Button (secondary hover, ghost hover)", "Input (read-only bg)"],
