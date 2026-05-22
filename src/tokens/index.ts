@@ -35,8 +35,14 @@ export const colors = {
     /** Brand red used as NEGATIVE state (error, destructive). Standard radius. */
     danger: "#EF4C59",
     "danger-hover": "#E04854",
+    /** Brand red used as PENDING / awaiting validation status. Cf. Labster badge 'En attente de validation'. */
+    pending: "#EF4C59",
     warning: "#FFC31D",
-    // success: TBD — not yet defined in Labster styleguide
+    /** Validated / success state. Observed in Labster status badges ('Validé').
+     *  Hex estimated — NOT extracted from brand kit Color palette frame.
+     *  [À CONFIRMER avec l'équipe Labster — pourrait être plus mint/jade/emerald]. */
+    success: "#4ECCA3",
+    "success-hover": "#3FB893",
   },
   neutral: {
     white: "#FFFFFF",
