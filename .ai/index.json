@@ -83,9 +83,39 @@
       "accessibility_target": "WCAG AA"
     },
     {
+      "name": "Card",
+      "type": "molecule",
+      "version": "V1.0",
+      "paths": {
+        "design_md": "../components/Card.design.md",
+        "metadata_ts": "../components/Card.metadata.ts"
+      },
+      "source": {
+        "figma_file_key": "fTtwrwxa74iSPMMTbq5GK8",
+        "figma_node_id": "TO_CREATE",
+        "figma_url": "https://www.figma.com/design/fTtwrwxa74iSPMMTbq5GK8 (Component Library page, to be created in Phase B.4)",
+        "labster_pattern_reference": "labster.io homepage service cards (Digital Product Design, Software Engineering, etc.)"
+      },
+      "variants_count": 8,
+      "variants": [
+        "default",
+        "interactive",
+        "with-actions",
+        "selectable",
+        "elevated",
+        "size-Small",
+        "size-Medium",
+        "size-Large"
+      ],
+      "states": ["default", "hover", "focus", "selected", "disabled"],
+      "accessibility_target": "WCAG AA",
+      "introduced_note": "V1.0 — introduced 2026-05-22 as MVP molecule, replacing Dialog as the primary composition pattern."
+    },
+    {
       "name": "Dialog",
       "type": "molecule",
       "version": "V0.1",
+      "status": "available but not MVP-prioritary (use Card for most composition needs)",
       "paths": {
         "design_md": "../components/Dialog.design.md",
         "metadata_ts": "../components/Dialog.metadata.ts",
@@ -110,13 +140,15 @@
     }
   ],
   "statistics": {
-    "total_components": 3,
+    "total_components": 4,
     "by_type": {
       "atom": 2,
-      "molecule": 1,
+      "molecule": 2,
       "organism": 0
     },
-    "total_variants": 19,
-    "variants_to_create_in_figma": 5
+    "total_variants": 27,
+    "variants_to_create_in_figma": 13,
+    "mvp_v1_components": ["Button", "Input", "Card"],
+    "dialog_status": "available but not MVP — kept for completeness"
   }
 }

@@ -96,6 +96,24 @@
       ]
     },
     {
+      "component": "Card",
+      "tokens": [
+        { "path": "colors.neutral.white", "usage_context": "container background" },
+        { "path": "colors.neutral.grey-1", "usage_context": "container border default" },
+        { "path": "colors.neutral.grey-2", "usage_context": "container border hover (interactive variant)" },
+        { "path": "colors.neutral.grey-3", "usage_context": "subtitle text" },
+        { "path": "colors.neutral.grey-4", "usage_context": "body text" },
+        { "path": "colors.neutral.grey-6", "usage_context": "title text" },
+        { "path": "colors.semantic.action-primary", "usage_context": "selected state border, focus ring" },
+        { "path": "typography.headings.h5", "usage_context": "title" },
+        { "path": "typography.text_styles.label_m", "usage_context": "subtitle" },
+        { "path": "typography.paragraphs.small", "usage_context": "body" },
+        { "path": "elevation.small", "usage_context": "elevated variant shadow (default)" },
+        { "path": "elevation.medium", "usage_context": "elevated variant shadow (high-priority) + interactive hover shadow" },
+        { "path": "shapes.radius.md", "usage_context": "container radius" }
+      ]
+    },
+    {
       "component": "Dialog",
       "tokens": [
         { "path": "colors.neutral.white", "usage_context": "container background" },
@@ -124,11 +142,14 @@
     "typography.text_styles.button_label": ["Button (all variants except link)", "Dialog (buttons via children)"],
     "typography.text_styles.button_link_label": ["Button (link variant)"],
     "typography.text_styles.label_m": ["Input (label above field, inline-left)"],
+    "typography.headings.h5": ["Card (title)"],
     "typography.headings.h6": ["Dialog (title)"],
     "typography.paragraphs.small": ["Input (value, placeholder, helper, all sizes)", "Dialog (description)"],
     "typography.paragraphs.small_semibold": ["Input (error message)"],
     "shapes.radius.sm": ["Button (default + icon-square)", "Input (field)"],
-    "shapes.radius.md": ["Dialog (container)"],
+    "shapes.radius.md": ["Card (container)", "Dialog (container)"],
+    "elevation.small": ["Card (elevated variant default)"],
+    "elevation.medium": ["Card (elevated high-priority, interactive hover)"],
     "elevation.large": ["Dialog (container shadow)"]
   },
   "tokens_unused_in_current_components": [

@@ -5,6 +5,28 @@
   "description": "Relations source -> target between Labster DS components. Used to answer Report queries like 'where is X used?' or 'what does Y contain?'.",
   "relations": [
     {
+      "source": "Card",
+      "target": "Button",
+      "relation_type": "contains",
+      "count": "0..2",
+      "context": "Card variant=with-actions contains 1-2 Button instances in the action area (typically secondary + primary, or a single link). Labster.io service cards use 1 Button variant=link ('En savoir plus →').",
+      "evidence": {
+        "design_md": "../components/Card.design.md#anatomie",
+        "metadata_ts_composition": "Card.metadata.ts composition[0]",
+        "labster_pattern": "labster.io homepage"
+      }
+    },
+    {
+      "source": "Card",
+      "target": "Input",
+      "relation_type": "contains-optional",
+      "count": "0..n (typically 0)",
+      "context": "Card MAY contain Input instances (form cards), but this is rare in MVP. Form-heavy cards should consider Dialog (modal form) or a dedicated form page.",
+      "evidence": {
+        "metadata_ts_composition": "Card.metadata.ts composition[1]"
+      }
+    },
+    {
       "source": "Dialog",
       "target": "Input",
       "relation_type": "contains",
@@ -43,14 +65,24 @@
       "name": "login-screen (étape 9 du POC)",
       "uses": ["Input", "Button"],
       "optional_uses": ["Dialog"]
+    },
+    {
+      "name": "labster.io homepage (Patterns page in Figma DS V0.1)",
+      "uses": ["Card (with-actions, Medium)", "Button (link)"],
+      "pattern": "3-4 service cards in a horizontal row, each with subtitle 'Service' + title + body + 'En savoir plus →' link"
+    },
+    {
+      "name": "contact form (Patterns page)",
+      "uses": ["Input", "Button (accent-cta)"],
+      "optional_uses": ["Card (variant=elevated for the form panel wrapper)"]
     }
   ],
   "missing_relations_noted": [
     {
       "expected_source": "Card",
       "expected_target": "Button + Input",
-      "status": "not_applicable",
-      "reason": "Card does not exist in Shadcn kit. Replaced by Dialog for the POC."
+      "status": "resolved_in_v1.0",
+      "resolution": "Card created from scratch for Labster (2026-05-22). See components/Card.design.md. Card now exists alongside Dialog (Dialog reserved for true modal use cases)."
     }
   ]
 }
