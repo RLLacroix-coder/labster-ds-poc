@@ -87,47 +87,38 @@ export const metadata: ComponentMetadata = {
       ],
       status: "stable",
     },
+  ],
+  sizes: [
     {
-      name: "size-small",
-      description:
-        "Compact size variant (32px height) for dense contexts.",
-      tokens_consumed: ["typography.text_styles.button_label"],
-      status: "to_create_in_figma",
+      name: "Giant",
+      description: "Marketing hero CTAs. 64px height, 20px font.",
+      status: "to_validate_with_labster",
     },
     {
-      name: "icon-only-square",
-      description:
-        "Square icon-only button (32×32) for toolbars and dense UIs.",
-      tokens_consumed: [
-        "colors.neutral.white",
-        "colors.neutral.smoke",
-        "colors.neutral.grey-1",
-        "colors.neutral.grey-6",
-        "shapes.radius.sm",
-      ],
+      name: "Large",
+      description: "Landing page CTAs. 56px height, 18px font.",
+      status: "to_validate_with_labster",
+    },
+    {
+      name: "Medium",
+      description: "Default product UI. 40px height, 16px font.",
       status: "stable",
     },
     {
-      name: "icon-only-circle",
-      description:
-        "Pill-shaped icon-only button (40×40) for floating actions.",
-      tokens_consumed: [
-        "colors.neutral.white",
-        "colors.neutral.smoke",
-        "colors.neutral.grey-1",
-        "colors.neutral.grey-6",
-        "shapes.radius.pill",
-      ],
+      name: "Small",
+      description: "Toolbars and dense contexts. 32px height, 14px font.",
       status: "stable",
     },
     {
-      name: "loading",
-      description:
-        "Loading state overlay (not a standalone variant). Applies to any variant via opacity + spinner.",
-      tokens_consumed: ["colors.neutral.grey-6"],
-      status: "stable",
+      name: "Tiny",
+      description: "Badges, breadcrumbs, ultra-dense UI. 24px height, 12px font.",
+      status: "to_validate_with_labster",
     },
   ],
+  icon_only_property: {
+    description:
+      "Boolean property. When true, button becomes square with a single icon (no label). Reduced padding ~80%. Available on all sizes and variants. link+icon-only combo is discouraged.",
+  },
 
   props: [
     {

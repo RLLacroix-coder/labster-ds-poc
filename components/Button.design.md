@@ -84,25 +84,42 @@ tokens:
         any_variant: "Opacité 50% du variant actif"
       content: "spinner + texte 'Loading...' ou texte du bouton"
   sizes:
-    default:
+    Giant:
+      height: "64px"
+      padding: "20px 32px"
+      font_size: "20px"
+      line_height: "28px"
+      icon_size: "24px"
+      status: "[À VALIDER avec l'équipe Labster — taille introduite POC V0.5 pour matcher la matrice du kit de référence]"
+    Large:
+      height: "56px"
+      padding: "16px 28px"
+      font_size: "18px"
+      line_height: "24px"
+      icon_size: "22px"
+      status: "[À VALIDER avec l'équipe Labster — taille introduite POC V0.5]"
+    Medium:
       height: "40px"
-      padding: "8px 16px"
+      padding: "12px 24px"
       typography: "{typography.text_styles.button_label}"
-    small:
+      icon_size: "18px"
+      status: "default — alignée avec le standard Labster"
+    Small:
       height: "32px"
+      padding: "8px 16px"
+      font_size: "14px"
+      line_height: "16px"
+      icon_size: "14px"
+      status: "stable — confirmée par Shadcn et état de l'art"
+    Tiny:
+      height: "24px"
       padding: "6px 12px"
-      typography: "Barlow Medium 13/20"
-      status: "[VARIANT À CONFIRMER — Shadcn n'a pas de size small explicite pour Button]"
-    icon_only_square:
-      width: "32px"
-      height: "32px"
-      padding: "8px"
-      radius: "{radius.sm}"
-    icon_only_circle:
-      width: "40px"
-      height: "40px"
-      padding: "12px"
-      radius: "{radius.pill}"
+      font_size: "12px"
+      line_height: "14px"
+      icon_size: "12px"
+      status: "[À VALIDER avec l'équipe Labster — taille introduite POC V0.5 pour les contextes très denses (badges, breadcrumbs)]"
+  icon_only:
+    description: "Property booléenne. Quand true, le bouton devient carré (square) avec un seul icon (pas de label). Padding réduit (~80% du padding vertical sur les 4 côtés). Disponible sur toutes les sizes et tous les variants. Combinaison link+icon-only existe mais discouragée (préférer un IconButton distinct)."
   states:
     - default
     - hover

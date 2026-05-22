@@ -55,6 +55,20 @@ export type Source = {
   inventory_date: string;
 };
 
+export type Size = {
+  /** Nom du size (ex: "Giant", "Large", "Medium", "Small", "Tiny") */
+  name: string;
+  /** Description : usage attendu de cette taille */
+  description: string;
+  /** Statut (stable | to_validate_with_labster | deprecated) */
+  status?: "stable" | "to_validate_with_labster" | "deprecated";
+};
+
+export type IconOnlyProperty = {
+  /** Description du comportement icon-only */
+  description: string;
+};
+
 export type ComponentMetadata = {
   /** Nom du composant (PascalCase) */
   name: string;
@@ -66,6 +80,10 @@ export type ComponentMetadata = {
   version: string;
   /** Variants du composant */
   variants: Variant[];
+  /** Sizes du composant (Component Set property `size`, optionnel) */
+  sizes?: Size[];
+  /** Property icon-only (booléenne, optionnel) */
+  icon_only_property?: IconOnlyProperty;
   /** Props exposées (pour codegen) */
   props: Prop[];
   /** États gérés (ex: ["default", "hover", "focus", "disabled"]) */
