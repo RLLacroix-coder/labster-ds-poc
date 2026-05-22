@@ -164,7 +164,7 @@ export const SizeLarge: Story = {
 
 export const LabsterServiceCards: Story = {
   render: () => (
-    <div className="flex gap-6 p-8 bg-neutral-smoke">
+    <div className="flex flex-wrap gap-6 p-8 bg-neutral-smoke min-h-[600px]">
       <Card
         variant="with-actions"
         size="Medium"
@@ -209,10 +209,12 @@ export const LabsterServiceCards: Story = {
   parameters: {
     layout: "fullscreen",
     docs: {
+      story: { inline: false, iframeHeight: 700 },
       description: {
         story:
           "Pattern observed on labster.io homepage : 3-4 service cards in a horizontal row. " +
-          "Variant=with-actions, Size=Medium, subtitle 'Service', Button variant=link.",
+          "Variant=with-actions, Size=Medium, subtitle 'Service', Button variant=link. " +
+          "💡 Astuce : passe en mode Canvas pour voir le pattern en pleine page.",
       },
     },
   },

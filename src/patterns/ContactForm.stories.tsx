@@ -16,11 +16,18 @@ const meta: Meta = {
   parameters: {
     layout: "fullscreen",
     docs: {
+      story: {
+        // Render stories in an iframe so they get full viewport width
+        // instead of being squeezed in the docs side panel.
+        inline: false,
+        iframeHeight: 900,
+      },
       description: {
         component:
           "Replication du formulaire de contact Labster (labster.io). " +
           "Démonstration de composition Input + Button variant=accent-cta. " +
-          "Le bouton 'Envoyer' utilise brand.red en POSITIVE role (pas danger).",
+          "Le bouton 'Envoyer' utilise brand.red en POSITIVE role (pas danger). " +
+          "💡 Astuce : passe en mode Canvas (icône en haut à droite, à côté de Docs) pour voir le pattern en pleine page.",
       },
     },
   },
@@ -31,10 +38,10 @@ type Story = StoryObj;
 
 export const Default: Story = {
   render: () => (
-    <div className="grid grid-cols-2 min-h-screen font-labster">
+    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen font-labster">
       {/* LEFT — dark bg with heading + copy + picto */}
-      <div className="bg-neutral-grey-6 text-neutral-white p-16 flex flex-col justify-center">
-        <h2 className="text-h2 mb-8">
+      <div className="bg-neutral-grey-6 text-neutral-white p-12 lg:p-16 flex flex-col justify-center min-w-0">
+        <h2 className="text-h3 lg:text-h2 mb-8">
           Démarrons
           <br />
           une discussion
@@ -52,42 +59,16 @@ export const Default: Story = {
       </div>
 
       {/* RIGHT — form panel white */}
-      <div className="bg-neutral-white p-16 flex items-center">
+      <div className="bg-neutral-white p-12 lg:p-16 flex items-center min-w-0">
         <form className="w-full max-w-lg space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              label="Nom"
-              placeholder=""
-              required
-              size="default"
-            />
-            <Input
-              label="Prénom"
-              placeholder=""
-              required
-              size="default"
-            />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input label="Nom" required size="default" />
+            <Input label="Prénom" required size="default" />
           </div>
-          <Input
-            label="Entreprise"
-            placeholder=""
-            required
-            size="default"
-          />
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              label="Email"
-              type="email"
-              placeholder=""
-              required
-              size="default"
-            />
-            <Input
-              label="Téléphone"
-              type="tel"
-              placeholder=""
-              size="default"
-            />
+          <Input label="Entreprise" required size="default" />
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Input label="Email" type="email" required size="default" />
+            <Input label="Téléphone" type="tel" size="default" />
           </div>
           <div>
             <label className="text-label-m text-neutral-grey-6 block mb-1">
