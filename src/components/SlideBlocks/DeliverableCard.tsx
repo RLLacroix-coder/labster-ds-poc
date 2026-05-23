@@ -73,7 +73,7 @@ export function DeliverableCard({
             <span
               aria-hidden
               className={clsx(
-                "absolute inset-x-0 -bottom-1 top-3 -z-0 -mx-1 rounded-sm",
+                "absolute inset-x-0 -bottom-1 top-3 -z-0",
                 HIGHLIGHT_BG[highlightColor],
               )}
             />

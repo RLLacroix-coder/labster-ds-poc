@@ -103,12 +103,12 @@ export function AgentCard({
         {/* Header : Picto */}
         {icon ? <div className="size-12 shrink-0">{icon}</div> : null}
 
-        {/* Title with highlight */}
-        <h3 className="relative inline-block">
+        {/* Title with highlight (rectangle net, largeur du texte uniquement) */}
+        <h3 className="relative inline-block self-start">
           <span
             aria-hidden
             className={clsx(
-              "absolute inset-x-0 bottom-0 top-1/2 -z-0 -mx-1 rounded-sm",
+              "absolute inset-x-0 bottom-0 top-1/2 -z-0",
               TONE_HIGHLIGHT_BG[tone],
             )}
           />
