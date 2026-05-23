@@ -4,14 +4,26 @@ Le Storybook du DS Labster est déployé automatiquement sur **Chromatic** à ch
 
 ## URL publique
 
-🔗 **https://6a118881fbc20cd7a43001a1-tjsgagljer.chromatic.com/**
+🔗 **URL stable (toujours latest `main`)** :
+
+```
+https://main--6a118881fbc20cd7a43001a1.chromatic.com/
+```
+
+Cette URL pointe toujours vers le build le plus récent de la branche `main`. À chaque push qui passe la GitHub Action (ou chaque `npx chromatic` manuel), cette URL est mise à jour automatiquement.
 
 (Partageable avec Christophe, l'équipe Labster, ou tout futur client.)
 
-Détails du build initial (2026-05-22) :
-- 14 components · 113 stories · 113 snapshots
-- Build 1 auto-accepted (baseline)
-- Project ID : `6a118881fbc20cd7a43001a1`
+### Build URLs (snapshots figés)
+
+Chaque build a aussi son URL spécifique de format `https://<project-id>-<random>.chromatic.com/`. Ces URLs sont des snapshots figés — pratiques pour partager une version précise (ex: PR review) mais ne suivent pas les updates.
+
+| Build | Date | Stories | URL build (figée) |
+|---|---|---|---|
+| #1 | 2026-05-22 | 113 | https://6a118881fbc20cd7a43001a1-tjsgagljer.chromatic.com/ |
+| #6 | 2026-05-23 | 126 | https://www.chromatic.com/build?appId=6a118881fbc20cd7a43001a1&number=6 |
+
+Project ID : `6a118881fbc20cd7a43001a1`
 
 ## Setup initial (une seule fois)
 
