@@ -11,7 +11,20 @@ import { FilterTabs } from "../components/FilterTabs";
 import { AgentCard, type AgentCardTone } from "../components/AgentCard";
 import { LabsterLogo } from "../components/LabsterLogo";
 import { Icon } from "../components/Icon";
+import { FloatingShape, type FloatingShapeColor, type FloatingShapeType } from "../components/Icon/FloatingShape";
 import type { AgentStatus } from "../components/StatusBadge";
+
+// Picto slot helper — square colored bg + floating shape inline
+function PictoSlot({ shape, color }: { shape: FloatingShapeType; color: FloatingShapeColor }) {
+  return (
+    <div
+      className="grid size-12 place-items-center rounded-xl"
+      style={{ backgroundColor: { red: "#FCD9D9", blue: "#D6DFFF", yellow: "#FFECB8" }[color] }}
+    >
+      <FloatingShape shape={shape} color={color} size={24} />
+    </div>
+  );
+}
 
 /**
  * Pattern : Labsterse Dashboard (My Agents)
@@ -63,7 +76,13 @@ interface Agent {
   totalRuns: number;
   status: AgentStatus;
   tone: AgentCardTone;
+  iconShape: FloatingShapeType;
 }
+
+// Mapping catégorie → tone brand (chaque agent assigne directement sa tone).
+// - red    = Sales / Marketing (cible commerciale, brand red as positive CTA)
+// - blue   = Support / Operations (process, fiabilité)
+// - yellow = Productivity (énergie, créativité)
 
 const AGENTS: Agent[] = [
   {
@@ -74,7 +93,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "red-purple",
+    tone: "red",
+    iconShape: "triangle-up",
   },
   {
     id: "content-summ",
@@ -84,7 +104,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "purple-pink",
+    tone: "yellow",
+    iconShape: "square",
   },
   {
     id: "support-triage",
@@ -94,7 +115,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "teal-blue",
+    tone: "blue",
+    iconShape: "plus",
   },
   {
     id: "meeting",
@@ -104,7 +126,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "blue-purple",
+    tone: "blue",
+    iconShape: "circle",
   },
   {
     id: "social",
@@ -114,7 +137,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "red-orange",
+    tone: "red",
+    iconShape: "diamond",
   },
   {
     id: "email",
@@ -124,7 +148,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "yellow-orange",
+    tone: "red",
+    iconShape: "triangle-down",
   },
   {
     id: "invoice",
@@ -134,7 +159,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "blue-cyan",
+    tone: "blue",
+    iconShape: "dot",
   },
   {
     id: "crm-sync",
@@ -144,7 +170,8 @@ const AGENTS: Agent[] = [
     createdAt: "May 5, 2026",
     totalRuns: 23500,
     status: "running",
-    tone: "green-teal",
+    tone: "red",
+    iconShape: "square-outline",
   },
 ];
 
@@ -243,6 +270,7 @@ function LabsterseDashboard() {
                   name={agent.name}
                   description={agent.description}
                   tone={agent.tone}
+                  icon={<PictoSlot shape={agent.iconShape} color={agent.tone} />}
                   status={agent.status}
                   meta={[
                     { label: "Created", value: agent.createdAt },

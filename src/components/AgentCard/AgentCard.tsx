@@ -5,41 +5,38 @@ import { StatusBadge, type AgentStatus } from "../StatusBadge";
 /**
  * Labster DS — AgentCard
  *
- * Card colorée pour représenter un agent IA dans une liste (Labsterse dashboard,
- * AI Studio, automations gallery).
+ * Card pour représenter un agent IA dans une liste app (Labsterse dashboard).
  *
- * Composition :
- * - Gradient background (preset par "tone" ou custom CSS gradient)
- * - Title (nom de l'agent, 18px Bold blanc)
- * - Description (2 lignes max, 14px Regular blanc/85)
+ * Design brand Labster (refait depuis le mockup Atlas en respectant le DS) :
+ * - White card, rounded-2xl, border grey-1 + shadow subtle
+ * - Bandeau couleur 8px en haut (brand color = catégorie)
+ * - Picto/icon top-left (40-48px, brand color matching tone)
+ * - Titre Bold grey-6 avec surlignage light (red-light/blue-light/yellow-light)
+ *   — cf. pattern DeliverableCard
+ * - Description grey-4
  * - Footer : meta items (Created, Total runs) + StatusBadge à droite
- * - Padding 24px, rounded-2xl, hauteur ~180px
  *
- * Le texte est en blanc pour contraste sur gradient — pas de variant light.
+ * Tones :
+ * - "red"    → bande red,    Picto rouge,   highlight red-light
+ * - "blue"   → bande blue,   Picto bleu,    highlight blue-light
+ * - "yellow" → bande yellow, Picto jaune,   highlight yellow-light
  *
- * Interactions :
- * - Si `onClick` ou `href` : devient cliquable (hover : légère élévation)
+ * Cohérent avec : StatCard (variant minimal accent bar), DeliverableCard (highlight pattern),
+ * RoleCard (header structure), InsightCard (icon + content layout).
  */
 
-export type AgentCardTone =
-  | "blue-purple"
-  | "red-purple"
-  | "teal-blue"
-  | "yellow-orange"
-  | "green-teal"
-  | "purple-pink"
-  | "blue-cyan"
-  | "red-orange";
+export type AgentCardTone = "red" | "blue" | "yellow";
 
-const GRADIENTS: Record<AgentCardTone, string> = {
-  "blue-purple": "linear-gradient(135deg, #476AE3 0%, #6A4DE3 50%, #AF52DE 100%)",
-  "red-purple": "linear-gradient(135deg, #EF4C59 0%, #B5436E 50%, #AF52DE 100%)",
-  "teal-blue": "linear-gradient(135deg, #4ECCA3 0%, #4AA0BC 50%, #476AE3 100%)",
-  "yellow-orange": "linear-gradient(135deg, #FFC31D 0%, #FF9A3D 50%, #EF4C59 100%)",
-  "green-teal": "linear-gradient(135deg, #6DCB69 0%, #4ECCA3 50%, #4AA0BC 100%)",
-  "purple-pink": "linear-gradient(135deg, #AF52DE 0%, #D14CB5 50%, #EF4C59 100%)",
-  "blue-cyan": "linear-gradient(135deg, #476AE3 0%, #4AA0BC 50%, #4ECCA3 100%)",
-  "red-orange": "linear-gradient(135deg, #EF4C59 0%, #FF7A4C 50%, #FFC31D 100%)",
+const TONE_STRIP_BG: Record<AgentCardTone, string> = {
+  red: "bg-brand-red",
+  blue: "bg-brand-blue",
+  yellow: "bg-brand-yellow",
+};
+
+const TONE_HIGHLIGHT_BG: Record<AgentCardTone, string> = {
+  red: "bg-brand-red-light",
+  blue: "bg-brand-blue-light",
+  yellow: "bg-brand-yellow-light",
 };
 
 export interface AgentCardMeta {
@@ -48,24 +45,24 @@ export interface AgentCardMeta {
 }
 
 export interface AgentCardProps extends HTMLAttributes<HTMLDivElement> {
-  /** Nom de l'agent (titre). */
+  /** Nom de l'agent (titre, avec highlight derrière). */
   name: string;
-  /** Description courte (2-3 phrases). */
+  /** Description courte (2-3 phrases, grey-4). */
   description?: string;
-  /** Items de metadata (ex: Created date, Total runs). */
+  /** Items metadata (ex: Created date, Total runs). */
   meta?: AgentCardMeta[];
-  /** Statut affiché en bottom-right via StatusBadge translucent. */
+  /** Statut affiché en bottom-right via StatusBadge. */
   status?: AgentStatus;
   /** Override le label par défaut du status. */
   statusLabel?: string;
-  /** Preset de gradient. Défaut "blue-purple". */
+  /** Tone brand. Défaut "blue". Définit la couleur du strip top + Picto + highlight. */
   tone?: AgentCardTone;
-  /** Override custom CSS background (ex: "linear-gradient(...)"). Ignore `tone` si fourni. */
-  customBackground?: string;
-  /** Si fourni, rend la card cliquable. */
+  /** Slot icon top-left (Picto, FloatingShape, ou custom). Taille 48×48 recommandée. */
+  icon?: ReactNode;
+  /** Si fourni, rend la card cliquable (a href). */
   href?: string;
-  /** Hauteur fixe (px). Défaut auto (min-height 180). */
-  height?: number;
+  /** Hauteur minimum (px). Défaut auto (≈ 240). */
+  minHeight?: number;
 }
 
 export function AgentCard({
@@ -74,10 +71,10 @@ export function AgentCard({
   meta,
   status,
   statusLabel,
-  tone = "blue-purple",
-  customBackground,
+  tone = "blue",
+  icon,
   href,
-  height,
+  minHeight = 240,
   className,
   onClick,
   ...rest
@@ -90,25 +87,43 @@ export function AgentCard({
       href={href}
       onClick={onClick}
       className={clsx(
-        "relative block w-full overflow-hidden rounded-2xl p-6 font-labster text-left text-neutral-white",
-        "shadow-[0_4px_12px_0_rgba(14,41,70,0.08)]",
-        isInteractive && "cursor-pointer transition-transform hover:-translate-y-0.5 hover:shadow-[0_8px_20px_0_rgba(14,41,70,0.12)]",
+        "relative block w-full overflow-hidden rounded-2xl border border-neutral-grey-1 bg-neutral-white text-left font-labster",
+        "shadow-[0_2px_8px_0_rgba(14,41,70,0.06)]",
+        isInteractive &&
+          "cursor-pointer transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_20px_0_rgba(14,41,70,0.10)]",
         className,
       )}
-      style={{
-        background: customBackground ?? GRADIENTS[tone],
-        minHeight: height ?? 180,
-      }}
+      style={{ minHeight }}
       {...rest}
     >
-      <div className="flex h-full flex-col">
-        <h3 className="text-[18px] font-bold leading-tight">{name}</h3>
+      {/* Top color band */}
+      <span aria-hidden className={clsx("block h-2 w-full", TONE_STRIP_BG[tone])} />
+
+      <div className="flex h-full flex-col gap-4 p-6" style={{ minHeight: minHeight - 8 }}>
+        {/* Header : Picto */}
+        {icon ? <div className="size-12 shrink-0">{icon}</div> : null}
+
+        {/* Title with highlight */}
+        <h3 className="relative inline-block">
+          <span
+            aria-hidden
+            className={clsx(
+              "absolute inset-x-0 bottom-0 top-1/2 -z-0 -mx-1 rounded-sm",
+              TONE_HIGHLIGHT_BG[tone],
+            )}
+          />
+          <span className="relative z-10 text-[20px] font-bold leading-tight text-neutral-grey-6">
+            {name}
+          </span>
+        </h3>
+
+        {/* Description */}
         {description ? (
           <p
-            className="mt-2 text-[14px] font-normal leading-snug text-white/85"
+            className="text-[14px] font-normal leading-snug text-neutral-grey-4"
             style={{
               display: "-webkit-box",
-              WebkitLineClamp: 2,
+              WebkitLineClamp: 3,
               WebkitBoxOrient: "vertical",
               overflow: "hidden",
             }}
@@ -117,29 +132,21 @@ export function AgentCard({
           </p>
         ) : null}
 
-        <div className="mt-auto flex items-end justify-between gap-2 pt-6">
-          <dl className="flex flex-col gap-1 text-[12px] leading-tight text-white/75">
+        {/* Footer : meta + status */}
+        <div className="mt-auto flex items-end justify-between gap-2 border-t border-neutral-grey-1 pt-4">
+          <dl className="flex flex-col gap-0.5 text-[12px] leading-tight text-neutral-grey-3">
             {meta?.map((m, i) => (
               <div key={i} className="flex items-baseline gap-2">
                 <dt className="font-semibold">{m.label}:</dt>
-                <dd className="font-normal">{m.value}</dd>
+                <dd className="font-normal text-neutral-grey-5">{m.value}</dd>
               </div>
             ))}
           </dl>
-          {status ? <StatusBadge status={status} label={statusLabel} appearance="translucent" /> : null}
+          {status ? <StatusBadge status={status} label={statusLabel} /> : null}
         </div>
       </div>
     </Component>
   );
 }
 
-export const AGENT_CARD_TONES: AgentCardTone[] = [
-  "blue-purple",
-  "red-purple",
-  "teal-blue",
-  "yellow-orange",
-  "green-teal",
-  "purple-pink",
-  "blue-cyan",
-  "red-orange",
-];
+export const AGENT_CARD_TONES: AgentCardTone[] = ["red", "blue", "yellow"];
