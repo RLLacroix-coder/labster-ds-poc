@@ -16,15 +16,14 @@ export const Default: Story = {
       <Sidebar
         header={<div className="font-labster text-[18px] font-bold text-neutral-grey-6">Labsterse</div>}
         footer={
-          <SidebarNavItem icon={<Icon name="arrow-right" size={16} />} label="Log out" as="button" />
+          <SidebarNavItem icon={<Icon name="log-out" size={18} />} label="Log out" as="button" />
         }
       >
-        <SidebarNavItem icon={<Icon name="menu" size={16} />} label="Overview" href="#" />
-        <SidebarNavItem icon={<Icon name="edit" size={16} />} label="Agents" href="#" active />
-        <SidebarNavItem icon={<Icon name="search" size={16} />} label="Analytics" href="#" />
-        <SidebarNavItem icon={<Icon name="mail" size={16} />} label="Team" href="#" />
-        <SidebarNavItem icon={<Icon name="check" size={16} />} label="Billing" href="#" />
-        <SidebarNavItem icon={<Icon name="attach" size={16} />} label="Settings" href="#" />
+        <SidebarNavItem icon={<Icon name="home" size={18} />} label="Overview" href="#" />
+        <SidebarNavItem icon={<Icon name="sparkles" size={18} />} label="Agents" href="#" active />
+        <SidebarNavItem icon={<Icon name="bar-chart" size={18} />} label="Analytics" href="#" />
+        <SidebarNavItem icon={<Icon name="users" size={18} />} label="Team" href="#" />
+        <SidebarNavItem icon={<Icon name="settings" size={18} />} label="Settings" href="#" />
       </Sidebar>
       <div className="flex-1 bg-neutral-smoke" />
     </div>

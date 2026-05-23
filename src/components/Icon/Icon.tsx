@@ -34,7 +34,14 @@ export type UiIconName =
   | "linkedin"
   | "twitter"
   | "alert-circle"
-  | "verified";
+  | "verified"
+  // Nav app icons (Sidebar SaaS dashboard)
+  | "home"
+  | "sparkles"
+  | "bar-chart"
+  | "users"
+  | "settings"
+  | "log-out";
 
 export interface IconProps extends Omit<SVGAttributes<SVGSVGElement>, "name"> {
   /** Icon name from the Labster UI icons registry */
@@ -214,6 +221,52 @@ const ICONS: Record<UiIconName, JSX.Element> = {
       d="M23 12l-2.44-2.78.34-3.68-3.61-.82-1.89-3.18L12 3 8.6 1.54 6.71 4.72l-3.61.81.34 3.68L1 12l2.44 2.78-.34 3.69 3.61.82 1.89 3.18L12 21l3.4 1.46 1.89-3.18 3.61-.82-.34-3.68L23 12zm-12.91 4.72l-3.8-3.81 1.48-1.48 2.32 2.33 5.85-5.87 1.48 1.48-7.33 7.35z"
       fill="currentColor"
     />
+  ),
+  // ===== Nav app icons (Lucide-inspired, MIT) =====
+  home: (
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M3 12L12 3l9 9" />
+      <path d="M5 10v10a1 1 0 001 1h3v-6h6v6h3a1 1 0 001-1V10" />
+    </g>
+  ),
+  sparkles: (
+    <path
+      d="M12 3l1.8 5.4a3 3 0 001.8 1.8L21 12l-5.4 1.8a3 3 0 00-1.8 1.8L12 21l-1.8-5.4a3 3 0 00-1.8-1.8L3 12l5.4-1.8a3 3 0 001.8-1.8L12 3z"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      fill="none"
+    />
+  ),
+  "bar-chart": (
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" fill="none">
+      <line x1="6" y1="20" x2="6" y2="14" />
+      <line x1="12" y1="20" x2="12" y2="8" />
+      <line x1="18" y1="20" x2="18" y2="4" />
+      <line x1="3" y1="20" x2="21" y2="20" />
+    </g>
+  ),
+  users: (
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2" />
+      <circle cx="9" cy="7" r="4" />
+      <path d="M22 21v-2a4 4 0 00-3-3.87" />
+      <path d="M16 3.13a4 4 0 010 7.75" />
+    </g>
+  ),
+  settings: (
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+    </g>
+  ),
+  "log-out": (
+    <g stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+      <path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4" />
+      <polyline points="16 17 21 12 16 7" />
+      <line x1="21" y1="12" x2="9" y2="12" />
+    </g>
   ),
 };
 
