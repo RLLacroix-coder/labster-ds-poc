@@ -67,4 +67,4 @@ Vision complète dans `workflow-agentique-vision.md`.
 
 - **Source of truth** = repo Git. Le Figma est un miroir généré via MCP. Modifications via PR sur le repo.
 - **Typo brand** = Fieldwork (commercial). Storybook/Figma fallback Inter car Fieldwork pas installée par défaut.
-- **Phase** : POC dry-run avant industrialisation SIG (Phase 2, CW22-CW26).
+- **Phase** : POC dry-run avant industrialisation.
