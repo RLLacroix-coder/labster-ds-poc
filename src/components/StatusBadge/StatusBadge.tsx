@@ -21,8 +21,8 @@ export type AgentStatus =
   | "queued";
 
 const STATUS: Record<AgentStatus, { label: string; dot: string; tone: "success" | "warning" | "danger" | "neutral" | "info" }> = {
-  running: { label: "Running", dot: "bg-[#4ECCA3]", tone: "success" },
-  completed: { label: "Completed", dot: "bg-[#4ECCA3]", tone: "success" },
+  running: { label: "Running", dot: "bg-semantic-success", tone: "success" },
+  completed: { label: "Completed", dot: "bg-semantic-success", tone: "success" },
   paused: { label: "Paused", dot: "bg-brand-yellow", tone: "warning" },
   queued: { label: "Queued", dot: "bg-brand-blue", tone: "info" },
   draft: { label: "Draft", dot: "bg-neutral-grey-3", tone: "neutral" },
@@ -61,7 +61,7 @@ export function StatusBadge({
       )}
       {...rest}
     >
-      <span aria-hidden className={clsx("inline-block size-1.5 rounded-full", meta.dot)} />
+      <span aria-hidden className={clsx("inline-block size-2 shrink-0 rounded-full", meta.dot)} />
       <span>{label ?? meta.label}</span>
     </span>
   );

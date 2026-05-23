@@ -45,9 +45,9 @@ export function KpiCard({
       )}
       {...rest}
     >
-      <div className="flex w-full items-baseline justify-between">
-        <p className="text-[40px] font-bold leading-none text-neutral-grey-6">{value}</p>
-        {icon ? <span className="text-neutral-grey-3">{icon}</span> : null}
+      <div className="flex w-full items-start justify-between">
+        <p className="text-[56px] font-bold leading-[1.05] text-neutral-grey-6">{value}</p>
+        {icon ? <span className="mt-2 text-neutral-grey-3">{icon}</span> : null}
       </div>
       <div className="flex w-full items-center justify-between gap-3">
         <p className="text-[14px] font-normal leading-tight text-neutral-grey-3">{label}</p>

@@ -85,13 +85,15 @@ export function Avatar({
       role="img"
       aria-label={name}
       className={clsx(
-        "inline-grid shrink-0 place-items-center rounded-full font-labster font-bold leading-none",
+        "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full font-labster font-bold",
         BG_COLOR[bgColor],
         className,
       )}
-      style={{ width: size, height: size, fontSize: FONT_SIZE[size] }}
+      style={{ width: size, height: size }}
     >
-      {initials}
+      <span style={{ fontSize: FONT_SIZE[size], lineHeight: 1, display: "inline-block" }}>
+        {initials}
+      </span>
     </div>
   );
 }
