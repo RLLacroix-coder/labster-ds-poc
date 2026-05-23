@@ -7,6 +7,7 @@
 // Atoms
 export * from "./components/Button";
 export * from "./components/ButtonLink";
+export * from "./components/ButtonIcon";
 export * from "./components/Input";
 export * from "./components/Icon";
 export * from "./components/Badge";
