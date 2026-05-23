@@ -16,6 +16,7 @@ export * from "./components/NavItem";
 // Molecules
 export * from "./components/Card";
 export * from "./components/ManagerCard";
+export * from "./components/Elevator";
 
 // Brand assets
 export * from "./components/LabsterLogo";

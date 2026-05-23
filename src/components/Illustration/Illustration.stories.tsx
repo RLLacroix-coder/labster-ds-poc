@@ -184,15 +184,6 @@ export const ExportProcessDoc: Story = {
         </li>
       </ol>
 
-      <div className="bg-brand-yellow-light border-l-4 border-brand-yellow p-4 rounded-md mb-4">
-        <p className="text-p-sm text-neutral-grey-6">
-          <strong>💡 À automatiser (Phase C)</strong> — un skill{" "}
-          <code>labster-ds:export-illustrations</code> pourra exporter
-          automatiquement les 14 illustrations depuis Figma via MCP +
-          sauvegarder en .svg + activer dans le registry.
-        </p>
-      </div>
-
       <h3 className="text-h5 text-neutral-grey-6 mb-3 mt-8">
         Traçabilité Figma — registry
       </h3>
