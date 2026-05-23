@@ -46,13 +46,28 @@ export function KpiCard({
       {...rest}
     >
       <div className="flex w-full items-start justify-between">
-        <p className="text-[56px] font-bold leading-[1.05] text-neutral-grey-6">{value}</p>
+        <p
+          className="font-bold text-neutral-grey-6"
+          style={{ fontSize: 72, lineHeight: 1.05, letterSpacing: "-0.02em" }}
+        >
+          {value}
+        </p>
         {icon ? <span className="mt-2 text-neutral-grey-3">{icon}</span> : null}
       </div>
       <div className="flex w-full items-center justify-between gap-3">
-        <p className="text-[14px] font-normal leading-tight text-neutral-grey-3">{label}</p>
+        <p
+          className="font-normal text-neutral-grey-3"
+          style={{ fontSize: 15, lineHeight: 1.2 }}
+        >
+          {label}
+        </p>
         {trend ? (
-          <span className="text-[12px] font-semibold leading-none text-neutral-grey-4">{trend}</span>
+          <span
+            className="font-semibold text-neutral-grey-4"
+            style={{ fontSize: 13, lineHeight: 1 }}
+          >
+            {trend}
+          </span>
         ) : null}
       </div>
     </div>

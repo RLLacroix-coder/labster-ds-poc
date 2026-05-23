@@ -10,6 +10,10 @@ import clsx from "clsx";
  * À distinguer de `Badge` :
  * - `Badge` : badge générique avec variants info/success/warning/etc. (typographie/colorisation)
  * - `StatusBadge` (ici) : dot indicator + texte, semi-transparent (utilisable sur fond coloré)
+ *
+ * Note d'implémentation : couleurs des dots en inline style (hex) plutôt que classes
+ * Tailwind dynamiques, pour garantir le rendu même si Tailwind JIT ne pick-up pas
+ * une classe générée dynamiquement.
  */
 
 export type AgentStatus =
@@ -20,13 +24,19 @@ export type AgentStatus =
   | "completed"
   | "queued";
 
-const STATUS: Record<AgentStatus, { label: string; dot: string; tone: "success" | "warning" | "danger" | "neutral" | "info" }> = {
-  running: { label: "Running", dot: "bg-semantic-success", tone: "success" },
-  completed: { label: "Completed", dot: "bg-semantic-success", tone: "success" },
-  paused: { label: "Paused", dot: "bg-brand-yellow", tone: "warning" },
-  queued: { label: "Queued", dot: "bg-brand-blue", tone: "info" },
-  draft: { label: "Draft", dot: "bg-neutral-grey-3", tone: "neutral" },
-  failed: { label: "Failed", dot: "bg-brand-red", tone: "danger" },
+interface StatusMeta {
+  label: string;
+  dotColor: string;
+  tone: "success" | "warning" | "danger" | "neutral" | "info";
+}
+
+const STATUS: Record<AgentStatus, StatusMeta> = {
+  running: { label: "Running", dotColor: "#4ECCA3", tone: "success" },
+  completed: { label: "Completed", dotColor: "#4ECCA3", tone: "success" },
+  paused: { label: "Paused", dotColor: "#FFC31D", tone: "warning" },
+  queued: { label: "Queued", dotColor: "#476AE3", tone: "info" },
+  draft: { label: "Draft", dotColor: "#707F8F", tone: "neutral" },
+  failed: { label: "Failed", dotColor: "#EF4C59", tone: "danger" },
 };
 
 export type StatusBadgeAppearance = "solid" | "translucent";
@@ -35,33 +45,38 @@ export interface StatusBadgeProps extends HTMLAttributes<HTMLSpanElement> {
   status: AgentStatus;
   /** Override le label par défaut. */
   label?: string;
-  /** Apparence du fond. "translucent" pour overlay sur fond coloré (ex: AgentCard gradient). */
+  /** Apparence du fond. "translucent" pour overlay sur fond coloré (ex: dark navy). */
   appearance?: StatusBadgeAppearance;
 }
-
-const APPEARANCE = {
-  solid: "bg-neutral-white border border-neutral-grey-1 text-neutral-grey-6",
-  translucent: "bg-white/85 backdrop-blur-sm text-neutral-grey-6",
-} as const;
 
 export function StatusBadge({
   status,
   label,
   appearance = "solid",
   className,
+  style,
   ...rest
 }: StatusBadgeProps) {
   const meta = STATUS[status];
+  const appearanceStyle =
+    appearance === "translucent"
+      ? { backgroundColor: "rgba(255, 255, 255, 0.92)", backdropFilter: "blur(6px)" }
+      : { backgroundColor: "#FFFFFF", border: "1px solid #E3E5E8" };
+
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-2 rounded-pill px-3 py-1.5 font-labster text-[13px] font-semibold leading-[1.2]",
-        APPEARANCE[appearance],
+        "inline-flex items-center gap-2 rounded-pill px-3 py-1.5 font-labster text-[13px] font-semibold leading-[1.2] text-neutral-grey-6",
         className,
       )}
+      style={{ ...appearanceStyle, ...style }}
       {...rest}
     >
-      <span aria-hidden className={clsx("inline-block size-[10px] shrink-0 rounded-full", meta.dot)} />
+      <span
+        aria-hidden
+        className="inline-block shrink-0 rounded-full"
+        style={{ width: 10, height: 10, backgroundColor: meta.dotColor }}
+      />
       <span className="whitespace-nowrap">{label ?? meta.label}</span>
     </span>
   );
