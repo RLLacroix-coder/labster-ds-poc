@@ -34,15 +34,15 @@ export const AllStatuses: Story = {
   ),
 };
 
-export const TranslucentOnGradient: Story = {
-  name: "Translucent (overlay sur fond coloré)",
+export const TranslucentOnDark: Story = {
+  name: "Translucent (overlay sur fond dark navy)",
   parameters: { layout: "padded" },
   render: () => (
     <div
       style={{
         padding: 40,
         borderRadius: 16,
-        background: "linear-gradient(135deg, #EF4C59, #AF52DE, #476AE3)",
+        background: "#0E2946", // neutral-grey-6 (brand dark navy)
         display: "flex",
         gap: 12,
       }}
@@ -50,6 +50,8 @@ export const TranslucentOnGradient: Story = {
       <StatusBadge status="running" appearance="translucent" />
       <StatusBadge status="paused" appearance="translucent" />
       <StatusBadge status="failed" appearance="translucent" />
+      <StatusBadge status="queued" appearance="translucent" />
+      <StatusBadge status="draft" appearance="translucent" />
     </div>
   ),
 };
