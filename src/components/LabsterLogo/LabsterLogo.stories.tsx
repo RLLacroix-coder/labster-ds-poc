@@ -9,10 +9,10 @@ const meta: Meta<typeof LabsterLogo> = {
     docs: {
       description: {
         component:
-          "Logo Labster — reproduction SVG inline du logo brand observé dans le brand kit " +
-          "(00-Labster-Tokens, page Logo Labster nodeId 705:2220). " +
-          "3 types (tagline / normal / symbol), 2 modes (light / dark), 5 colorVariants (3-colors / monochrome / red / blue / yellow). " +
-          "⚠ Version POC SVG inline. Pour pixel-perfect, exporter depuis Figma et substituer.",
+          "Logo Labster — assets SVG officiels exportés depuis Figma " +
+          "(00-Labster-Tokens, page Logo Labster nodeId 705:2220), stockés dans `public/assets/logos/`. " +
+          "3 types (tagline / normal / symbol), 2 modes (light / dark), 6 colorVariants (3-colors / monochrome / red / blue / yellow / grey). " +
+          "Auto-fallback : si le fichier SVG est absent, l'inline reconstruction POC prend le relais.",
       },
     },
   },
@@ -27,7 +27,7 @@ const meta: Meta<typeof LabsterLogo> = {
     },
     colorVariant: {
       control: { type: "select" },
-      options: ["3-colors", "monochrome", "red", "blue", "yellow"],
+      options: ["3-colors", "monochrome", "red", "blue", "yellow", "grey"],
     },
     width: {
       control: { type: "number", min: 24, max: 600, step: 24 },

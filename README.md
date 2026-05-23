@@ -18,10 +18,11 @@ POC AI-ready Design System pour Labster. **Lib React + Tailwind + Storybook** sy
 | **Intent** | `components/` (specs) | DESIGN.md + metadata.ts par composant |
 | **Indexing** | `.ai/` | index.json + component-usage.json + design-tokens.json |
 | **Orchestration** | `CLAUDE.md` + `rules/` | Contrat runtime agent + méthode reproductible |
-| **Code React** | `src/components/` | 10 composants : Button, ButtonLink, Input, Checkbox, Badge, NavItem, Icon, Card, ManagerCard, LabsterLogo, Picto, Illustration |
+| **Code React** | `src/components/` | Button, ButtonLink, Input, Checkbox, Badge, NavItem, Icon, Card, ManagerCard, LabsterLogo, LabsterShape, Picto, Illustration |
+| **Slide Blocks** | `src/components/SlideBlocks/` | 6 composants récurrents pour composer des slides : SlideBanner, StatCard, InsightCard, DeliverableCard, UserProfileChip, EffortGanttCard |
 | **Storybook** | `src/**/*.stories.tsx` | 150+ stories |
 | **Patterns** | `src/patterns/` | Contact Form (Labster) |
-| **Assets** | `public/assets/` | 14 illustrations + 70+ pictos + 4 portraits managers |
+| **Assets** | `public/assets/` | 14 illustrations + 70+ pictos + 4 portraits managers + 15 logos Labster (SVG officiels) + 3 brand shapes (Design/Dev/Talents) |
 
 ## 🚀 Quickstart
 

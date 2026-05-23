@@ -1,4 +1,4 @@
-import { forwardRef, type SVGAttributes } from "react";
+import { useState, type SVGAttributes } from "react";
 import clsx from "clsx";
 
 /**
@@ -8,8 +8,14 @@ import clsx from "clsx";
  * (Icons / Floating Elements). Utilisées pour les illustrations brand,
  * accents visuels, motifs de fond.
  *
- * Shapes : triangle (down/up), diamond, square, circle, plus, dot
+ * Shapes : triangle (down/up), diamond, square, square-outline, circle,
+ *          circle-outline, plus, dot
  * Colors : red, blue, yellow (brand)
+ *
+ * Comportement :
+ * 1. Cherche d'abord le SVG dans `/assets/floating-elements/floating-element-<shape>-<color>.svg`
+ * 2. Fallback automatique sur la reconstruction SVG inline (parfaitement
+ *    acceptable — les shapes sont géométriquement simples)
  *
  * Pour usage décoratif uniquement — aria-hidden par défaut.
  */
@@ -76,27 +82,49 @@ const SHAPES: Record<FloatingShapeType, (color: string) => JSX.Element> = {
   dot: (color) => <circle cx="12" cy="12" r="4" fill={color} />,
 };
 
-export const FloatingShape = forwardRef<SVGSVGElement, FloatingShapeProps>(
-  ({ shape, color = "blue", size = 24, className, ...rest }, ref) => {
-    const shapeElement = SHAPES[shape](COLOR_HEX[color]);
+export function FloatingShape({
+  shape,
+  color = "blue",
+  size = 24,
+  className,
+  ...rest
+}: FloatingShapeProps) {
+  const [failed, setFailed] = useState(false);
+
+  // Try external SVG first (pixel-perfect Figma export if available)
+  if (!failed) {
     return (
-      <svg
-        ref={ref}
+      // Using <img> so the file 404 triggers onError and falls back to inline SVG.
+      // Decorative-only: aria-hidden.
+      // eslint-disable-next-line jsx-a11y/alt-text
+      <img
+        src={`/assets/floating-elements/floating-element-${shape}-${color}.svg`}
+        alt=""
+        aria-hidden
         width={size}
         height={size}
-        viewBox="0 0 24 24"
-        xmlns="http://www.w3.org/2000/svg"
-        aria-hidden="true"
+        onError={() => setFailed(true)}
         className={clsx("inline-block", className)}
-        {...rest}
-      >
-        {shapeElement}
-      </svg>
+      />
     );
   }
-);
 
-FloatingShape.displayName = "FloatingShape";
+  // Inline SVG reconstruction — always works
+  const shapeElement = SHAPES[shape](COLOR_HEX[color]);
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+      className={clsx("inline-block", className)}
+      {...rest}
+    >
+      {shapeElement}
+    </svg>
+  );
+}
 
 export const FLOATING_SHAPE_TYPES: FloatingShapeType[] = [
   "triangle-down",
