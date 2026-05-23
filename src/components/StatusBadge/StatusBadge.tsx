@@ -55,14 +55,14 @@ export function StatusBadge({
   return (
     <span
       className={clsx(
-        "inline-flex items-center gap-1.5 rounded-pill px-2.5 py-1 font-labster text-[12px] font-semibold leading-none",
+        "inline-flex items-center gap-2 rounded-pill px-3 py-1.5 font-labster text-[13px] font-semibold leading-[1.2]",
         APPEARANCE[appearance],
         className,
       )}
       {...rest}
     >
-      <span aria-hidden className={clsx("inline-block size-2 shrink-0 rounded-full", meta.dot)} />
-      <span>{label ?? meta.label}</span>
+      <span aria-hidden className={clsx("inline-block size-[10px] shrink-0 rounded-full", meta.dot)} />
+      <span className="whitespace-nowrap">{label ?? meta.label}</span>
     </span>
   );
 }
