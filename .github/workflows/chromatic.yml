@@ -30,7 +30,10 @@ jobs:
           cache: npm
 
       - name: Install dependencies
-        run: npm ci
+        # Use npm install (not npm ci) to be tolerant of package-lock.json desyncs
+        # — Claude Code can add devDeps to package.json but cannot regenerate the lock
+        # file in its sandbox. npm install resolves and updates the lock as needed.
+        run: npm install
 
       - name: Publish to Chromatic
         uses: chromaui/action@v11
