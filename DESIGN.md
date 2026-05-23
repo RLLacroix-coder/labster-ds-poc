@@ -1,6 +1,6 @@
 ---
 title: Labster Design System
-version: V0.1 (POC, dry-run SIG)
+version: V0.1 (POC, dry-run)
 date: 2026-05-22
 sources:
   tokens_figma_file_key: PVYjz7w3CG5Lh0GU2iAoG3
@@ -201,9 +201,9 @@ Le Labster Design System (DS Labster) est l'ensemble des règles visuelles, des 
 
 **État actuel** : un brand kit + tokens (couleurs, typo, élévation) versionné en styles Figma. Pas de bibliothèque UI variabilisée. Le POC 2026-05-22 documente 3 composants (Button, Input, Dialog) en se basant sur le kit Shadcn UI re-tokenisé sur les couleurs et typo Labster.
 
-**Public cible** : équipes design + dev internes Labster, et clients qui auront accès au DS dans le cadre d'engagements (ex : Insight, SIG par capillarité).
+**Public cible** : équipes design + dev internes Labster, et clients qui auront accès au DS dans le cadre d'engagements.
 
-**Périmètre POC** : 3 composants (Button, Input, Dialog). À l'échelle Phase 2 SIG, ce périmètre s'étendra à 8-10 composants.
+**Périmètre POC** : 3 composants (Button, Input, Dialog). À l'échelle Phase 2, ce périmètre s'étendra à 8-10 composants.
 
 ## 2. Colors
 
