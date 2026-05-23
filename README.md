@@ -19,9 +19,10 @@ POC AI-ready Design System pour Labster. **Lib React + Tailwind + Storybook** sy
 | **Indexing** | `.ai/` | index.json + component-usage.json + design-tokens.json |
 | **Orchestration** | `CLAUDE.md` + `rules/` | Contrat runtime agent + méthode reproductible |
 | **Code React** | `src/components/` | Button, ButtonLink, Input, Checkbox, Badge, NavItem, Icon, Card, ManagerCard, LabsterLogo, LabsterShape, Picto, Illustration |
-| **Slide Blocks** | `src/components/SlideBlocks/` | 6 composants récurrents pour composer des slides : SlideBanner, StatCard, InsightCard, DeliverableCard, UserProfileChip, EffortGanttCard |
-| **Storybook** | `src/**/*.stories.tsx` | 150+ stories |
-| **Patterns** | `src/patterns/` | Contact Form (Labster) |
+| **App UI** | `src/components/` | AppShell, Sidebar (+ SidebarNavItem), PageHeader, Avatar, KpiCard, FilterTabs, StatusBadge, AgentCard |
+| **Slide Blocks** | `src/components/SlideBlocks/` | 12 composants pour slides : SlideBanner, StatCard, InsightCard, DeliverableCard, UserProfileChip, EffortGanttCard, RoleCard, PersonCard, Timer, TimedListItem, SlideParagraph, SourceLink |
+| **Storybook** | `src/**/*.stories.tsx` | 180+ stories |
+| **Patterns** | `src/patterns/` | Contact Form (Labster) · Labsterse Dashboard (My agents) |
 | **Assets** | `public/assets/` | 14 illustrations + 70+ pictos + 4 portraits managers + 15 logos Labster (SVG officiels) + 3 brand shapes (Design/Dev/Talents) |
 
 ## 🚀 Quickstart
