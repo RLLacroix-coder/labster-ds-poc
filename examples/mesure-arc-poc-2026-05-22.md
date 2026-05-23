@@ -12,7 +12,7 @@ biais_assume: Mesure par auto-évaluation dans la session qui a généré le DS.
 
 Mesure de la qualité des réponses du protocole ARC (Audit / Report / Compose) sur 5 queries de référence ([queries-de-reference.md](./queries-de-reference.md)).
 
-> **Limite méthodologique assumée** : cette mesure est faite par l'agent qui a produit les fichiers. Le contexte est "chaud" — réponses immédiates sans relecture coûteuse. La mesure rigoureuse pour un benchmark SIG demanderait une session vierge avec chrono réel.
+> **Limite méthodologique assumée** : cette mesure est faite par l'agent qui a produit les fichiers. Le contexte est "chaud" — réponses immédiates sans relecture coûteuse. La mesure rigoureuse pour un benchmark client demanderait une session vierge avec chrono réel.
 
 ## Résultats par query
 
@@ -90,9 +90,9 @@ Mesure de la qualité des réponses du protocole ARC (Audit / Report / Compose) 
 | **Anti-invention respectée** | ✅ |
 | **Sources citées (traçabilité)** | ✅ pour toutes les queries |
 
-## Comparaison cible mandat SIG
+## Comparaison cible mandat client
 
-| Indicateur | POC Labster V0.1 | Cible SIG | Écart |
+| Indicateur | POC Labster V0.1 | Cible client | Écart |
 |---|---|---|---|
 | Accuracy | 100% | ≥ 95% | ✅ +5 pts |
 | Completeness | 100% | 100% | ✅ Atteint |
@@ -106,23 +106,23 @@ Mesure de la qualité des réponses du protocole ARC (Audit / Report / Compose) 
    - Accuracy reste ≥ 95% car les artefacts sont bien structurés.
    - Speed se dégrade un peu (lecture initiale des index + DESIGN.md), mais devrait rester < 30s pour les queries Audit/Report (lecture JSON), < 60s pour Compose (lecture multi-fichiers + génération).
 
-2. **5 queries seulement** : pas représentatif du spectre complet. À l'industrialisation Phase 2 SIG, prévoir 20-30 queries (golden set) couvrant chaque type de composant et chaque pattern usage.
+2. **5 queries seulement** : pas représentatif du spectre complet. À l'industrialisation Phase 2 client, prévoir 20-30 queries (golden set) couvrant chaque type de composant et chaque pattern usage.
 
-3. **Pas de control run sans `.ai/`** : pour mesurer l'**effet** ARC, il faudrait comparer avec un Claude qui n'aurait QUE les DESIGN.md (sans les index). C'est le vrai test que Cris Morales Achiardi promeut. À organiser en Phase 2 SIG sur 2-3 queries.
+3. **Pas de control run sans `.ai/`** : pour mesurer l'**effet** ARC, il faudrait comparer avec un Claude qui n'aurait QUE les DESIGN.md (sans les index). C'est le vrai test que Cris Morales Achiardi promeut. À organiser en Phase 2 client sur 2-3 queries.
 
 4. **Pas de mesure adversariale** : aucune query ne teste les garde-fous (ex : "génère un bouton avec un rouge custom #FF0000"). À ajouter dans le golden set Phase 2.
 
 ## Findings opérationnels POC
 
-Au cours de la production V0.1, les findings critiques pour SIG ont été :
+Au cours de la production V0.1, les findings critiques pour client ont été :
 
 1. **Pré-requis Figma "library publiée" trop strict** : MCP lit les fichiers via authentification, pas besoin de publication library pour le POC. Cf. mémoire `project_labster_ds_poc.md`.
-2. **Plan Figma Professional bloque la publication Variables** : pré-requis Organization à vérifier en Phase 1 audit SIG.
-3. **DS Labster est un brand kit, pas une UI library** : à anticiper pour le DS SIG (peut être pareil → l'industrialisation passera d'abord par "créer les composants" avant de pouvoir les rendre AI-ready).
+2. **Plan Figma Professional bloque la publication Variables** : pré-requis Organization à vérifier en Phase 1 audit client.
+3. **DS Labster est un brand kit, pas une UI library** : à anticiper pour le DS client (peut être pareil → l'industrialisation passera d'abord par "créer les composants" avant de pouvoir les rendre AI-ready).
 4. **Card n'existe pas dans Shadcn** : la liste des composants à documenter doit être croisée avec ce qui existe vraiment dans la lib source.
-5. **Conflit identité/sémantique brand red / semantic.danger** : pattern récurrent (toute marque avec un rouge brand l'aura). Inclure un check spécifique en audit SIG.
+5. **Conflit identité/sémantique brand red / semantic.danger** : pattern récurrent (toute marque avec un rouge brand l'aura). Inclure un check spécifique en audit client.
 
-## Décisions pour la Phase 2 SIG
+## Décisions pour la Phase 2 client
 
 - ✅ Méthode 4 couches (Tokenization / Intent / Indexing / Orchestration) validée.
 - ✅ Pivot pragmatique "réutiliser une lib externe re-tokenisée" validé quand le DS client n'a pas encore d'UI.
