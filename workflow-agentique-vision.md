@@ -5,7 +5,7 @@ date_v0.1: 2026-05-22
 date_v0.2: 2026-05-22 (révision stack technique)
 date_v0.3: 2026-05-22 (ajout workflow Creation/Maintenance du DS)
 statut: V0.3 — 2 workflows distincts (Creation/Maintenance + Usage), stack Claude Code + Figma MCP + Storybook + React + Tailwind
-audience: équipe Labster (PM, Designer, Dev) + Christophe (CTO) pour validation
+audience: équipe Labster (PM, Designer, Dev) + Remy et Christophe pour validation
 related:
   - projects/labster-ds/tutoriel-ds-ai-ready-labster-2026-05-13.md (V0.5)
   - projects/sig/master-process-ia-sig-2026-05-07.md
@@ -366,7 +366,7 @@ La cohérence des 4 vues est garantie par :
 | Rôle | Mission dans le workflow | Outils principaux |
 |---|---|---|
 | **PO / PM** (Rachel) | Brief, validation PRD, validation UX du prototype, sign-off final | Claude Code + skills ai-pm:* + agile-pm:* |
-| **Designer** (Christophe ou collaborateur) | Validation visuelle Figma, ajustements design, validation handover | Figma + Claude Code + skills uxr:* + labster-ds:* |
+| **Designer** (collaborateur) | Validation visuelle Figma, ajustements design, validation handover | Figma + Claude Code + skills uxr:* + labster-ds:* |
 | **Dev** (équipe Labster) | Implémentation, review handover, PR | IDE + Claude Code + DS Labster (codegen) |
 
 ### Agents / Skills (V0.2 — pipeline Claude Code)
@@ -464,9 +464,9 @@ Pour valider que le workflow tient, mesurer sur **1 cas d'usage Labster réel** 
 |---|---|---|
 | Le DS Labster Figma sera assez riche pour couvrir 80% des cas en V1.0 | Designer doit créer des composants à chaque cas → workflow casse | Cible V1.0 = 3 composants, mais étendre rapidement à 8-10 (V1.1) si besoin |
 | Les agents peuvent lire le Figma fidèlement via MCP | Si les Variables Figma ne sont pas dispo (cas Pro plan), agents lisent moins bien | On a déjà la stratégie de fallback (extraction via design context) en V0.4 |
-| Le designer accepte de travailler dans un workflow Figma + repo Git | Si le designer rejette le repo, on perd la cohérence DS | Convaincre Christophe sur la valeur du miroir Figma + commits PR sur DESIGN.md |
+| Le designer accepte de travailler dans un workflow Figma + repo Git | Si le designer rejette le repo, on perd la cohérence DS | Convaincre sur la valeur du miroir Figma + commits PR sur DESIGN.md |
 | Fieldwork peut être installée dans Figma Labster | Si non, fallback Inter pour les agents Figma | Cherché — actuellement fallback Inter documenté |
-| L'équipe produit Labster accepte d'utiliser Claude Code | Si rejet, le workflow agentique n'a pas d'utilisateur | Démo sur Insight avec Christophe (qui est CTO Oval, déjà familier) |
+| L'équipe produit Labster accepte d'utiliser Claude Code | Si rejet, le workflow agentique n'a pas d'utilisateur | Démo sur projet concret |
 
 ---
 
@@ -474,7 +474,7 @@ Pour valider que le workflow tient, mesurer sur **1 cas d'usage Labster réel** 
 
 ### Phase A (ce document, fait)
 **Livrable** : ce fichier de vision.
-**Validateur** : Rachel, ensuite optionnellement Christophe.
+**Validateur** : Remy.
 
 ### Phase B — Refonte DS Labster V1.0 + setup React/Tailwind/Storybook (8-10h)
 **Livrable** (V0.2 enrichi) :
@@ -510,16 +510,16 @@ Pour valider que le workflow tient, mesurer sur **1 cas d'usage Labster réel** 
 
 ### Phase D (optionnelle, V1.1+) — Validation sur cas réel Labster
 **Livrable** : 1 feature Labster (Insight ou autre) prototypée end-to-end via le workflow.
-**Validateur** : Christophe + équipe.
+**Validateur** : Christophe, Remy + équipe.
 
 ---
 
 ## Prochaines décisions
 
-1. **Avant de lancer Phase B** : valider que cette vision résonne avec Christophe. Une réunion 30 min pour partager le doc.
+1. **Avant de lancer Phase B** : valider que cette vision résonne avec Christophe et Remy. Une réunion 30 min pour partager le doc.
 2. **Pendant Phase B** : choisir Card vs Dialog (Card prioritaire selon la vision, Dialog peut rester séparé).
 3. **Pendant Phase C** : décider si on utilise un format de skill existant (Cohort 8) ou si on en construit un Labster spécifique.
 
 ---
 
-*Document interne Labster, V0.1 du 2026-05-22. À reviewer en réunion avec Christophe avant d'attaquer Phase B.*
+*Document interne Labster, V0.1 du 2026-05-22. À reviewer en réunion avec Christophe et Remy avant d'attaquer Phase B.*
