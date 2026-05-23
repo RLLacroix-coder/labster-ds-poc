@@ -2,8 +2,7 @@
 
 ## Contexte projet
 
-POC AI-ready Design System Labster. Dry-run avant l'industrialisation SIG (Phase 2, CW22-CW26).
-Tutoriel suivi : `projects/labster-ds/tutoriel-ds-ai-ready-labster-2026-05-13.md` (repo `labster-aipm-jti`).
+POC AI-ready Design System Labster. Dry-run avant l'industrialisation.
 
 ### Sources Figma
 
