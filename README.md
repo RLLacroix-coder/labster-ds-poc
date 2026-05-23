@@ -6,7 +6,7 @@ POC AI-ready Design System pour Labster. **Lib React + Tailwind + Storybook** sy
 
 | Surface | Lien |
 |---|---|
-| **Storybook live** | ⏳ À compléter après 1er déploiement Chromatic (voir [CHROMATIC.md](./CHROMATIC.md)) |
+| **Storybook live** 🎨 | https://6a118881fbc20cd7a43001a1-tjsgagljer.chromatic.com/ |
 | **Figma DS V1.0** | https://www.figma.com/design/fTtwrwxa74iSPMMTbq5GK8 |
 | **GitHub repo** | https://github.com/RLLacroix-coder/labster-ds-poc |
 
