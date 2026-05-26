@@ -4,12 +4,20 @@
 
 POC AI-ready Design System Labster. Dry-run avant l'industrialisation.
 
+Au 2026-05-24, le repo expose :
+- **25+ composants React + Tailwind** dans `src/components/` (Atoms, App UI, Slide Blocks, Brand)
+- **3 patterns** dans `src/patterns/` (ContactForm, LabsterseDashboard, PortefeuilleClients)
+- **Storybook live** sur Chromatic : https://main--6a118881fbc20cd7a43001a1.chromatic.com/
+- **CI auto-deploy** sur push main via GitHub Action
+
 ### Sources Figma
 
-- **Tokens (couleurs, typo, élévation)** : fichier "00-Labster-Tokens" (fileKey `PVYjz7w3CG5Lh0GU2iAoG3`)
+- **Brand tokens** (couleurs, typo, élévation) : `00-Labster-Tokens` (fileKey `PVYjz7w3CG5Lh0GU2iAoG3`)
   - Styles legacy uniquement (pas de Variables) — plan Labster Pro, publication Variables bloquée.
-- **Composants (Button, Input, Card)** : fichier "01-Shadcn-Kit-POC" (fileKey `tPwrOV9EX9jLXuxsBskINR`)
-  - Re-mappés sur les tokens Labster en étape 6.
+- **DS de référence (Shadcn-style)** : `01-Shadcn-Kit-POC` (fileKey `tPwrOV9EX9jLXuxsBskINR`)
+  - Re-mappé sur tokens Labster.
+- **Miroir Figma du DS code** : `02-Labster-DS-V0.1` (fileKey `fTtwrwxa74iSPMMTbq5GK8`)
+  - Page "Test Usage DS" héberge les frames design intent des features qui consomment le DS.
 
 ## Couches agentiques (référentiel Cris Morales Achiardi)
 
@@ -64,7 +72,95 @@ Avant toute génération, applique ce protocole :
 
 ## Limites assumées du POC (à rappeler si on s'en éloigne)
 
-- 3 composants seulement, peut masquer des problèmes d'échelle (>10 composants).
-- Stack-agnostique HTML/CSS pour la génération d'écran (étape 9), pas Angular/React.
-- Pas de Storybook, pas de CI.
-- Mesure ARC à la main (étape 10), pas de control run sans `.ai/` pour comparaison.
+- ~25 composants au 2026-05-24, encore POC (pas de versioning sémantique ni de breaking-changes log).
+- Tests unitaires absents — seul le typecheck garantit la robustesse.
+- `.ai/` indexes pas systématiquement régénérés après chaque ajout.
+- Pas encore de codegen Figma → React systématique (pipeline manuel via MCP).
+- Mesure ARC à la main, pas de control run sans `.ai/` pour comparaison.
+
+---
+
+# Workflow 2 — USAGE du DS (consommer le DS pour faire une feature)
+
+Section dédiée à la **consommation** du DS pour produire une nouvelle UI dans Storybook. À distinguer du Workflow CREATION (ajout d'un composant au DS) documenté dans `rules/add-component-method.md`.
+
+## Quand appliquer ce workflow
+
+Tu reçois un **brief feature** (PRD, JTBD, problem statement) et il faut produire une UI dans Storybook en consommant les composants existants du DS.
+
+Format brief attendu :
+- Persona + JTBD
+- Contraintes (lecture seule / mock data / 100% DS)
+- Métriques de succès
+- Données à afficher (V1.0 scope)
+
+Si le brief est absent ou incomplet, demande-le avant de continuer.
+
+## Ordre des étapes (non négociable)
+
+```
+Brief → [Figma D'ABORD] → [Code APRÈS] → Findings
+```
+
+**Figma AVANT le code** est non-optionnel sauf throwaway proto 5 min explicite. Coder avant d'avoir une intention design écrite produit systématiquement de la **copie paresseuse** d'un pattern existant (anti-pattern observé : recyclage d'un composant sémantiquement inadapté).
+
+### Étape A — Design intent Figma
+
+Avant tout code, crée UNE frame Figma 1400×900 sur la page "Test Usage DS" du fichier `02-Labster-DS-V0.1` (fileKey `fTtwrwxa74iSPMMTbq5GK8`), via Figma MCP (`mcp__figma__use_figma`).
+
+- Conçois le **layout depuis le brief** (hiérarchie info-first, parcours du regard). PAS en mode "copie un pattern existant".
+- Utilise les **vrais assets DS** : `public/assets/logos/labster-logo-symbol-light-3-colors.svg`, paths SVG des Icon (cf. `src/components/Icon/Icon.tsx`), FloatingShape (cf. `src/components/Icon/FloatingShape.tsx`).
+- Tokens uniquement (hex `#0E2946` grey-6, `#EF4C59` red, `#476AE3` blue, `#FFC31D` yellow, `#FCD9D9` red-light, `#D6DFFF` blue-light, `#FFECB8` yellow-light).
+- Itère jusqu'à validation utilisateur (typiquement 2-3 passes : layout brut → fixes overflow/badges/initiales → assets réels).
+- Réponds avec : URL Figma, liste des composants utilisés, liste des nouveaux masters proposés (avec justification), gaps non résolus.
+
+### Étape B — Vibe-code depuis Figma validé
+
+Une fois la frame Figma validée par l'humain, transpose en code dans `src/patterns/<FeatureName>.stories.tsx`.
+
+- **Fidélité Figma** : le code matche la frame layout pour layout. Pas de re-design pendant l'impl.
+- Pour chaque composant Figma : grep `src/components/` → si existe, import direct. Sinon, **crée le nouveau composant aligné** dans `src/components/<X>/` avec sa story standalone.
+- Mock data inline (10-15 enregistrements réalistes, **noms fictifs anonymisés** — pas de vrais clients).
+- Catégorie Storybook : `Patterns/Test Usage DS/<FeatureName>` avec `parameters.layout: "fullscreen"` et `docs.story: { inline: false, iframeHeight: 1024 }`.
+
+### Étape C — Findings
+
+Produis un rapport (chat OU fichier markdown local côté utilisateur) avec :
+- **Composants DS utilisés** (liste `<X> × <count>`)
+- **Nouveaux composants créés** (liste avec lien fichier)
+- **Gaps non-résolus** (composants Figma sans équivalent code, justifier pourquoi)
+- **Frictions API** (props confuses, naming, variants manquants)
+- **Temps réel mesuré** par étape
+
+## Garde-fous Workflow USAGE (non-négociables)
+
+1. **RÉUTILISE D'ABORD** : pour chaque besoin UI, grep `src/components/`. Si un composant existant couvre 80%+ du besoin → utilise-le.
+2. **ALIGNE QUAND TU CRÉES** : si un nouveau composant est nécessaire :
+   - **Tokens uniquement** (`src/tokens/index.ts` + classes Tailwind du `tailwind.config.ts`)
+   - **Patterns visuels existants** : white cards, rounded-2xl, bandeau couleur 8px top, highlight rectangulaire derrière titre (cf. AgentCard, DeliverableCard, PriorityCard)
+   - **Conventions API** : props cohérents (`tone="red|blue|yellow"`, `size="..."`, `clsx` pour merge classes)
+   - **Inspire-toi** du composant existant le plus proche dans l'esprit (ex. `EngagementRow` s'inspire de `AgentCard` mais sémantique propre)
+3. **PAS DE COPIE PARESSEUSE** : ne réutilise pas un composant uniquement "parce qu'il existe et ressemble". Ex : un `AgentCard` pour représenter un engagement client = mauvaise réutilisation sémantique → crée un `EngagementRow` aligné.
+4. **PAS D'INVENTION VISUELLE** : pas de gradient, pas de hex inline, pas de typo hors Fieldwork + Inter fallback. Si tu as envie de violer le DS pour "améliorer", c'est un signal de **gap** — flag-le au lieu d'inventer.
+5. **PAS DE BACKEND** : toutes les données mockées inline. Pas de `fetch`, pas de `useEffect` data loading.
+6. **HUMAN IN THE LOOP** : utilisateur valide à chaque étape (brief → Figma → code → findings). Pas de merge ni de push auto.
+
+## Composants disponibles (au 2026-05-24)
+
+**Brand** : `LabsterLogo`, `LabsterShape`
+
+**App UI** : `AppShell`, `Sidebar` + `SidebarNavItem`, `PageHeader`, `Avatar`, `KpiCard`, `FilterTabs`, `StatusBadge`, `AgentCard`, `PriorityCard`, `EngagementRow`, `TeamStack`, `CapacityBar`
+
+**Atoms/Molecules** : `Button`, `ButtonLink`, `ButtonIcon`, `Input`, `Checkbox`, `Badge`, `NavItem`, `Icon`, `Card`, `ManagerCard`, `Picto`, `Illustration`, `Elevator` + `ElevatorAnchorLink`
+
+**Slide Blocks** (utilisables aussi en contexte app) : `SlideBanner`, `StatCard`, `InsightCard`, `DeliverableCard`, `UserProfileChip`, `EffortGanttCard`, `RoleCard`, `PersonCard`, `Timer`, `TimedListItem`, `SlideParagraph`, `SourceLink`
+
+Pour la matrix exhaustive props × variants : ouvre la story Storybook → onglets Controls + Docs.
+
+## Anti-patterns à éviter
+
+- ❌ Coder avant Figma → produit une copie paresseuse du dernier pattern vu
+- ❌ Réutiliser un composant pour autre chose que sa sémantique d'origine
+- ❌ Hacker du `<div>` + Tailwind brut quand un composant DS existe
+- ❌ Inventer une nouvelle couleur / radius / shadow plutôt que flag le gap
+- ❌ Skip findings → les gaps observés se reperdent et le DS stagne
