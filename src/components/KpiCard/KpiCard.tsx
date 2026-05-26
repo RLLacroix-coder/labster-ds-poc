@@ -27,6 +27,8 @@ export interface KpiCardProps extends HTMLAttributes<HTMLDivElement> {
   icon?: ReactNode;
   /** Indicateur de tendance optionnel (ex: "+12%"). */
   trend?: ReactNode;
+  /** Mode alerte : valeur + trend en rouge brand pour signaler un seuil dépassé. Défaut false. */
+  alert?: boolean;
 }
 
 export function KpiCard({
@@ -34,6 +36,7 @@ export function KpiCard({
   label,
   icon,
   trend,
+  alert = false,
   className,
   ...rest
 }: KpiCardProps) {
@@ -47,8 +50,8 @@ export function KpiCard({
     >
       <div className="flex w-full items-start justify-between">
         <p
-          className="font-bold text-neutral-grey-6"
-          style={{ fontSize: 72, lineHeight: 1.05, letterSpacing: "-0.02em" }}
+          className={clsx("font-bold", alert ? "text-brand-red" : "text-neutral-grey-6")}
+          style={{ fontSize: 64, lineHeight: 1.05, letterSpacing: "-0.02em" }}
         >
           {value}
         </p>
@@ -63,7 +66,10 @@ export function KpiCard({
         </p>
         {trend ? (
           <span
-            className="font-semibold text-neutral-grey-4"
+            className={clsx(
+              "font-semibold",
+              alert ? "text-brand-red" : "text-neutral-grey-4",
+            )}
             style={{ fontSize: 13, lineHeight: 1 }}
           >
             {trend}
