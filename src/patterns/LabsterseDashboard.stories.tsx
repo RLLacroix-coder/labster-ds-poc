@@ -1,18 +1,24 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { AppShell } from "../components/AppShell";
-import { Sidebar, SidebarNavItem } from "../components/Sidebar";
-import { PageHeader } from "../components/PageHeader";
-import { Avatar } from "../components/Avatar";
-import { Button } from "../components/Button";
-import { Input } from "../components/Input";
-import { KpiCard } from "../components/KpiCard";
-import { FilterTabs } from "../components/FilterTabs";
-import { AgentCard, type AgentCardTone } from "../components/AgentCard";
-import { LabsterLogo } from "../components/LabsterLogo";
-import { Icon } from "../components/Icon";
-import { FloatingShape, type FloatingShapeColor, type FloatingShapeType } from "../components/Icon/FloatingShape";
-import type { AgentStatus } from "../components/StatusBadge";
+import {
+  AppShell,
+  Sidebar,
+  SidebarNavItem,
+  PageHeader,
+  Avatar,
+  Button,
+  Input,
+  KpiCard,
+  FilterTabs,
+  AgentCard,
+  LabsterLogo,
+  Icon,
+  FloatingShape,
+  type AgentCardTone,
+  type FloatingShapeColor,
+  type FloatingShapeType,
+  type AgentStatus,
+} from "@labster-ds-poc";
 
 // Picto slot helper — square colored bg + floating shape inline
 function PictoSlot({ shape, color }: { shape: FloatingShapeType; color: FloatingShapeColor }) {

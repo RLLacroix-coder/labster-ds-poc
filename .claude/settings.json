@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(node:.claude/hooks/lint-tokens.mjs*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .claude/hooks/lint-tokens.mjs \"${CLAUDE_TOOL_INPUT_FILE_PATH}\" 2>&1 || true"
+          }
+        ]
+      }
+    ]
+  }
+}

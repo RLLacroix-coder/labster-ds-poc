@@ -1,0 +1,56 @@
+---
+description: "Règles d'utilisation des composants Labster DS — priorité à la réutilisation, interdiction de réinventer les composants existants"
+globs: ["src/patterns/**/*.tsx", "src/components/**/*.tsx"]
+---
+
+# Règles Composants Labster DS
+
+## Protocole avant toute création de composant
+
+1. **Consulter l'index** : `.ai/index.json` — liste tous les composants disponibles
+2. **Si ≥80% du besoin couvert** → réutiliser le composant existant
+3. **Si nouveau composant nécessaire** → créer dans `src/components/<Nom>/` avec story standalone
+
+## Composants disponibles (au 2026-05-24)
+
+**Brand** : `LabsterLogo`, `LabsterShape`
+
+**App UI** : `AppShell`, `Sidebar`, `SidebarNavItem`, `PageHeader`, `Avatar`, `KpiCard`, `FilterTabs`, `StatusBadge`, `AgentCard`, `PriorityCard`, `EngagementRow`, `TeamStack`, `CapacityBar`
+
+**Atoms/Molecules** : `Button`, `ButtonLink`, `ButtonIcon`, `Input`, `Checkbox`, `Badge`, `NavItem`, `Icon`, `Card`, `ManagerCard`, `Picto`, `Illustration`, `Elevator`, `ElevatorAnchorLink`
+
+**Slide Blocks** : `SlideBanner`, `StatCard`, `InsightCard`, `DeliverableCard`, `UserProfileChip`, `EffortGanttCard`, `RoleCard`, `PersonCard`, `Timer`, `TimedListItem`, `SlideParagraph`, `SourceLink`
+
+## Anti-patterns à éviter
+
+- ❌ Coder avant Figma (cf. Workflow USAGE dans `CLAUDE.md`)
+- ❌ `AgentCard` pour représenter autre chose qu'un agent IA
+- ❌ `<div>` + Tailwind brut quand un composant DS couvre le besoin
+- ❌ Inventer une couleur / radius / shadow → flag le gap DS
+
+## Patterns visuels existants à réutiliser
+
+- White cards : `rounded-2xl bg-white shadow-sm`
+- Bandeau couleur 8px top : voir `AgentCard`, `DeliverableCard`
+- Highlight rectangulaire derrière titre : voir `AgentCard`, `DeliverableCard`, `PriorityCard`
+- Props API : `tone="red|blue|yellow"`, `size="..."`, `clsx` pour merge classes
+
+## Données mockées
+
+- Toujours inline dans les stories (`const MOCK_DATA = [...]`)
+- 10–15 enregistrements réalistes, noms fictifs anonymisés
+- Jamais de `fetch`, `useEffect` data loading, ni de backend
+
+## Catégorie Storybook patterns
+
+```
+Patterns/Test Usage DS/<FeatureName>
+parameters.layout: "fullscreen"
+docs.story: { inline: false, iframeHeight: 1024 }
+```
+
+## Référence
+
+- `CLAUDE.md` — workflow USAGE complet
+- `rules/metadata-schema.ts` — schéma Intent Layer
+- `.ai/index.json` — inventaire machine-readable

@@ -1,0 +1,36 @@
+---
+description: "Règles de tokens Labster DS — interdit les couleurs hardcodées et les classes Tailwind arbitraires dans les composants React"
+globs: ["src/components/**/*.tsx", "src/components/**/*.ts", "src/patterns/**/*.tsx"]
+---
+
+# Règles Tokens Labster DS
+
+## Interdit
+
+- **Pas de hex hardcodé** dans `.tsx` / `.ts` / `.css` :
+  - ❌ `style={{ color: '#0E2946' }}`
+  - ❌ `className="bg-[#476AE3]"`
+  - ❌ `border: '#EF4C59'`
+
+- **Pas de classes Tailwind arbitraires** avec hex :
+  - ❌ `bg-[#476AE3]`, `text-[#EF4C59]`, `border-[#0E2946]`
+
+- **Pas de valeurs dimensionnelles arbitraires** :
+  - ❌ `text-[13px]`, `w-[320px]` → utiliser les classes d'espacement configurées
+
+## Obligatoire
+
+- **Couleurs → classes Tailwind configurées** dans `tailwind.config.ts` :
+  - ✅ `bg-navy`, `bg-blue`, `bg-red`, `bg-yellow`
+  - ✅ `text-navy`, `text-blue`, `text-red`
+  - ✅ `bg-blue-light`, `bg-red-light`, `bg-yellow-light`
+
+- **Variables CSS** depuis `src/tokens/index.ts` si besoin programmatique
+
+- **Tokens manquants** → marquer `[TOKEN LABSTER MANQUANT — à définir]` au lieu d'inventer
+
+## Référence
+
+- `tailwind.config.ts` — classes disponibles
+- `src/tokens/index.ts` — variables TypeScript
+- `tokens/labster-tokens.json` — source DTCG W3C

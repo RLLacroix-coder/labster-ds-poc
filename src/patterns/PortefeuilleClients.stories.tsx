@@ -1,20 +1,25 @@
 import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
-import { AppShell } from "../components/AppShell";
-import { Sidebar, SidebarNavItem } from "../components/Sidebar";
-import { PageHeader } from "../components/PageHeader";
-import { Avatar } from "../components/Avatar";
-import { Button } from "../components/Button";
-import { KpiCard } from "../components/KpiCard";
-import { FilterTabs } from "../components/FilterTabs";
-import { Icon } from "../components/Icon";
-import { LabsterLogo } from "../components/LabsterLogo";
-import { FloatingShape, type FloatingShapeType, type FloatingShapeColor } from "../components/Icon/FloatingShape";
-import { PriorityCard } from "../components/PriorityCard";
-import { EngagementRow } from "../components/EngagementRow";
-import { CapacityBar } from "../components/CapacityBar";
-import type { TeamMember } from "../components/TeamStack";
-import type { AgentStatus } from "../components/StatusBadge";
+import {
+  AppShell,
+  Sidebar,
+  SidebarNavItem,
+  PageHeader,
+  Avatar,
+  Button,
+  KpiCard,
+  FilterTabs,
+  Icon,
+  LabsterLogo,
+  FloatingShape,
+  PriorityCard,
+  EngagementRow,
+  CapacityBar,
+  type FloatingShapeType,
+  type FloatingShapeColor,
+  type TeamMember,
+  type AgentStatus,
+} from "@labster-ds-poc";
 
 /**
  * Pattern : Portefeuille clients Le Labster (vue Remy Meyer COO/BDM)

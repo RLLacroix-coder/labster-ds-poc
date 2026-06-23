@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { Input } from "../components/Input";
-import { Button } from "../components/Button";
+import { Input, Button } from "@labster-ds-poc";
 
 /**
  * Pattern : Contact Form Labster

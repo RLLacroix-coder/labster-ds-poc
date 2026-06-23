@@ -9,6 +9,7 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./src"),
       "@tokens": path.resolve(__dirname, "./src/tokens"),
       "@components": path.resolve(__dirname, "./src/components"),
+      "@labster-ds-poc": path.resolve(__dirname, "./src/components/index.ts"),
     },
   },
 });

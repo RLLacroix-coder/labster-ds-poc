@@ -25,7 +25,8 @@
     "paths": {
       "@/*": ["./src/*"],
       "@tokens/*": ["./src/tokens/*"],
-      "@components/*": ["./src/components/*"]
+      "@components/*": ["./src/components/*"],
+      "@labster-ds-poc": ["./src/components/index.ts"]
     }
   },
   "include": [

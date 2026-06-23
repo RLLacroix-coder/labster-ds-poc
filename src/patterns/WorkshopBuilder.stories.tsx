@@ -1,14 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import clsx from "clsx";
-import { AppShell } from "../components/AppShell";
-import { Sidebar, SidebarNavItem } from "../components/Sidebar";
-import { PageHeader } from "../components/PageHeader";
-import { Avatar, type AvatarBgColor } from "../components/Avatar";
-import { Button } from "../components/Button";
-import { Badge } from "../components/Badge";
-import { Checkbox } from "../components/Checkbox";
-import { Icon } from "../components/Icon";
-import { LabsterLogo } from "../components/LabsterLogo";
+import {
+  AppShell,
+  Sidebar,
+  SidebarNavItem,
+  PageHeader,
+  Avatar,
+  Button,
+  Badge,
+  Checkbox,
+  Icon,
+  LabsterLogo,
+  type AvatarBgColor,
+} from "@labster-ds-poc";
 
 /**
  * Pattern : Workshop Builder (vue Léa Kaufmann, UX Designer Senior)

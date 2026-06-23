@@ -44,6 +44,20 @@ export type Composition = {
   cardinality: string;
 };
 
+/** Règles de nidification — décrit où CE composant peut/ne peut pas vivre, et ce qu'il peut contenir. */
+export type CompositionRules = {
+  /** Parents autorisés. Absent = aucune contrainte. */
+  allowed_in?: string[];
+  /** Parents interdits. Prioritaire sur allowed_in si conflit. */
+  forbidden_in?: string[];
+  /** Enfants autorisés à l'intérieur de CE composant. */
+  allowed_children?: string[];
+  /** Enfants interdits à l'intérieur de CE composant. */
+  forbidden_children?: string[];
+  /** Explication des contraintes (pourquoi, pas juste quoi). */
+  rationale?: string;
+};
+
 export type Source = {
   /** Clé du fichier Figma */
   figma_file_key: string;
@@ -98,6 +112,8 @@ export type ComponentMetadata = {
   examples: Example[];
   /** Composition : autres composants Labster utilisés (uniquement pour molecules/organisms) */
   composition?: Composition[];
+  /** Règles de nidification (quels parents/enfants sont autorisés ou interdits) */
+  composition_rules?: CompositionRules;
   /** Référence Figma source */
   source: Source;
   /** Niveau WCAG visé */

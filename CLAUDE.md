@@ -77,6 +77,7 @@ Avant toute génération, applique ce protocole :
 - `.ai/` indexes pas systématiquement régénérés après chaque ajout.
 - Pas encore de codegen Figma → React systématique (pipeline manuel via MCP).
 - Mesure ARC à la main, pas de control run sans `.ai/` pour comparaison.
+- Alias `@labster-ds-poc` (cf. script démo SIG scène 4) PAS encore configuré — les imports patterns sont relatifs (`../components/...`). À ajouter dans `tsconfig.json` paths + `vite.config.ts` resolve.alias pour matcher le scénario de publication V1.1.
 
 ---
 
@@ -123,6 +124,17 @@ Une fois la frame Figma validée par l'humain, transpose en code dans `src/patte
 - Mock data inline (10-15 enregistrements réalistes, **noms fictifs anonymisés** — pas de vrais clients).
 - Catégorie Storybook : `Patterns/Test Usage DS/<FeatureName>` avec `parameters.layout: "fullscreen"` et `docs.story: { inline: false, iframeHeight: 1024 }`.
 
+### Étape B.1 — Vérification Storybook local
+
+Avant les Findings, lance Storybook et valide le rendu visuel avec l'utilisateur.
+
+- `npm run storybook` (port 6006 par défaut).
+- Navigue vers `Patterns/Test Usage DS/<FeatureName>` ou ouvre directement `http://localhost:6006/?path=/story/patterns-test-usage-ds-<feature>--default`.
+- Mode Canvas pour les stories `parameters.layout: "fullscreen"`.
+- **GO humain explicite** avant Findings. Si rendu cassé, retour Étape B (pas Étape A — le design intent est validé, c'est l'impl qui dérive).
+
+`npm run typecheck` échoue actuellement sur un bug pré-existant `tsconfig.node.json` (composite/noEmit) — le compile Vite via Storybook tient lieu de vérification syntaxique en attendant le fix.
+
 ### Étape C — Findings
 
 Produis un rapport (chat OU fichier markdown local côté utilisateur) avec :
@@ -131,6 +143,17 @@ Produis un rapport (chat OU fichier markdown local côté utilisateur) avec :
 - **Gaps non-résolus** (composants Figma sans équivalent code, justifier pourquoi)
 - **Frictions API** (props confuses, naming, variants manquants)
 - **Temps réel mesuré** par étape
+
+### Étape D — Publication (push + Chromatic auto-deploy)
+
+Après validation Findings :
+- Commit conventionnel : `feat(patterns): <FeatureName> — <V1.x description>` (cf. style des commits récents via `git log`).
+- Push branche → PR → merge `main`.
+- GitHub Action auto-déploie Storybook sur Chromatic : https://main--6a118881fbc20cd7a43001a1.chromatic.com/
+- URL pattern final : `https://main--6a118881fbc20cd7a43001a1.chromatic.com/?path=/story/patterns-test-usage-ds-<feature>--default`
+- Délai CI typique : 2-3 min.
+
+Pas de merge auto. La validation Étape B.1 + Findings est le gate humain.
 
 ## Garde-fous Workflow USAGE (non-négociables)
 
@@ -164,3 +187,29 @@ Pour la matrix exhaustive props × variants : ouvre la story Storybook → ongle
 - ❌ Hacker du `<div>` + Tailwind brut quand un composant DS existe
 - ❌ Inventer une nouvelle couleur / radius / shadow plutôt que flag le gap
 - ❌ Skip findings → les gaps observés se reperdent et le DS stagne
+
+---
+
+# Prompts par rôle (multi-rôles SIG démo + équipe Labster)
+
+Quand l'IA est sollicitée par rôle métier, démarre le prompt par le préambule de rôle pour ancrer la posture, les responsabilités et les garde-fous spécifiques. Cohérent avec le script démo SIG (cf. `examples/script-video-demo-bloc3-sig-2026-06-09.md`).
+
+## PO
+
+> Tu es PO chez `<Client>`. Mets au propre ce brief : structure en sections (Contexte métier, Logique métier, Critères d'acceptation, Cas d'usage). Pose les questions qui manquent pour le scope V1.0. NE PAS inventer de règles métier — flag les ambiguïtés.
+
+## Designer
+
+> Tu es Designer chez Labster. Voici CLAUDE.md, DESIGN.md global, composants `.design.md`, brief PO. Génère le DESIGN.md de l'écran `<X>` qui compose UNIQUEMENT depuis le DS. Marque `[COMPOSANT MANQUANT — à créer]` plutôt que d'inventer. Puis pousse la frame design intent dans Figma `02-Labster-DS-V0.1` page « Test Usage DS ».
+
+## Dev
+
+> Tu es Dev chez Labster. Voici la spec d'écran et le DS Labster dans `src/components/`. Génère le composant React + Tailwind dans `src/patterns/<X>.stories.tsx`. CONTRAINTE : tu IMPORTES depuis `src/components/<X>`. PAS de hex inline. Mock data inline anonymisée. Inclus tests unitaires si demandé.
+
+## Publisher
+
+> Tu es Publisher chez Labster. Voici l'écran + voice Labster (analytique, précis, direct, pas de superlatifs) + voice client (cf. brief). Génère titre, libellés, messages d'erreur (constructifs), aide, CTA. Conformité légale citée explicitement.
+
+## Tech Lead
+
+> Tu es Tech Lead chez Labster. Applique le protocole ARC sur la feature `<X>` : AUDIT (composants DS utilisés, cf. `.ai/index.json`), REPORT (tokens consommés vs `.ai/design-tokens.json`, flag écarts), COMPOSE (3 améliorations priorisées : cohérence DS / sécurité / accessibilité / perf). Cite fileKey + nodeId Figma source.

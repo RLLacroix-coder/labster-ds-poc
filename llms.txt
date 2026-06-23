@@ -1,0 +1,66 @@
+# Labster Design System — Index de navigation IA
+
+> Point d'entrée pour tout agent IA travaillant dans ce repo.
+> Lire ce fichier EN PREMIER, avant toute exploration de l'arborescence.
+
+## Démarrer ici
+
+- [CLAUDE.md](CLAUDE.md) — règles, protocoles ARC, garde-fous critiques, workflow USAGE
+- [DESIGN.md](DESIGN.md) — vision globale du DS (couleurs, typo, layout, brand, voix)
+
+## Structure du repo
+
+### Couche Tokenization
+- [tokens/labster-styles-raw.md](tokens/labster-styles-raw.md) — extraction brute des styles Figma
+- [src/tokens/index.ts](src/tokens/index.ts) — tokens TypeScript exportables
+
+### Couche Intent (source de vérité)
+- [components/](components/) — un `DESIGN.md` + `metadata.ts` par composant
+- [components/Button.metadata.ts](components/Button.metadata.ts)
+- [components/Input.metadata.ts](components/Input.metadata.ts)
+- [components/Card.metadata.ts](components/Card.metadata.ts)
+- [components/Dialog.metadata.ts](components/Dialog.metadata.ts)
+
+### Couche Indexing (index machine-readable)
+- [.ai/index.json](.ai/index.json) — inventaire de tous les composants + métadonnées
+- [.ai/component-usage.json](.ai/component-usage.json) — relations d'usage entre composants
+- [.ai/design-tokens.json](.ai/design-tokens.json) — tokens avec leurs usages
+
+### Code React + Tailwind
+- [src/components/](src/components/) — implémentation React + Tailwind (25+ composants)
+- [tailwind.config.ts](tailwind.config.ts) — configuration Tailwind avec tokens Labster
+- [src/patterns/](src/patterns/) — patterns composés (ContactForm, Dashboard, etc.)
+
+### Couche Orchestration
+- [rules/](rules/) — schémas, méthodes, conventions
+  - [rules/metadata-schema.ts](rules/metadata-schema.ts) — schéma TypeScript de la couche Intent
+  - [rules/metadata-schema.md](rules/metadata-schema.md) — documentation du schéma
+  - [rules/component-schema.v1.json](rules/component-schema.v1.json) — schéma JSON de validation CI
+  - [rules/add-component-method.md](rules/add-component-method.md) — méthode d'ajout d'un composant
+- [skills/](skills/) — skills Claude Code
+- [.claude/](. claude/) — configuration Claude Code (hooks, settings)
+
+### Descriptions Figma dédiées
+- [specs/figma-descriptions/](specs/figma-descriptions/) — contrats Figma par composant
+
+## Protocole ARC (obligatoire avant toute génération)
+
+1. **Audit** : charge `.ai/index.json` → réponds depuis l'index, jamais brute-force
+2. **Report** : charge `.ai/component-usage.json` ou `.ai/design-tokens.json` pour les relations
+3. **Compose** : charge le `DESIGN.md` + `metadata.ts` du composant concerné
+
+## Garde-fous critiques (résumé)
+
+- Jamais de hex hardcodé — toujours via tokens (`src/tokens/index.ts` ou classes Tailwind configurées)
+- Jamais de classes Tailwind arbitraires (`bg-[#476AE3]`, `text-[13px]`) — utiliser les classes du `tailwind.config.ts`
+- Jamais d'invention de tokens manquants — marquer `[TOKEN LABSTER MANQUANT]`
+- Jamais de variants inventés — marquer `[VARIANT MANQUANT EN FIGMA]`
+- Human-in-the-Loop : toute génération est un draft. Rachel valide avant merge.
+
+## Storybook live
+https://main--6a118881fbc20cd7a43001a1.chromatic.com/
+
+## Sources Figma
+- Tokens brand : `PVYjz7w3CG5Lh0GU2iAoG3` (00-Labster-Tokens)
+- DS de référence : `tPwrOV9EX9jLXuxsBskINR` (01-Shadcn-Kit-POC)
+- Miroir DS code : `fTtwrwxa74iSPMMTbq5GK8` (02-Labster-DS-V0.1)

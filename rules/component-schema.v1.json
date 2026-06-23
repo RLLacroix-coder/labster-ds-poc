@@ -1,0 +1,229 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://labster.io/ds/component-schema.v1.json",
+  "title": "Labster DS — Component Manifest v1",
+  "description": "Schéma de validation des fichiers metadata.ts de la couche Intent du DS Labster. Adapté du schéma DLS-Lead (Nadiyq/DLS-Lead) pour React + Tailwind + tokens Labster.",
+  "type": "object",
+  "required": ["name", "description", "type", "version", "variants", "props", "states", "tokens_consumed", "usage_recommended", "usage_discouraged", "examples", "source"],
+  "additionalProperties": false,
+
+  "properties": {
+
+    "name": {
+      "type": "string",
+      "pattern": "^[A-Z][a-zA-Z0-9]+$",
+      "description": "Nom PascalCase du composant React (ex: 'Button', 'InputField')"
+    },
+
+    "description": {
+      "type": "string",
+      "minLength": 20,
+      "description": "Description concise : QUOI fait ce composant + QUAND l'utiliser (min. 20 caractères)"
+    },
+
+    "type": {
+      "type": "string",
+      "enum": ["atom", "molecule", "organism"],
+      "description": "Niveau d'atomicité dans le DS"
+    },
+
+    "version": {
+      "type": "string",
+      "pattern": "^V\\d+\\.\\d+$",
+      "description": "Version du composant dans le DS Labster (ex: 'V0.1', 'V1.0')"
+    },
+
+    "variants": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Variants du composant (au moins 1 requis)",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "tokens_consumed"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string", "description": "Identifiant unique du variant (ex: 'primary', 'ghost')" },
+          "description": { "type": "string", "description": "Quand utiliser ce variant" },
+          "tokens_consumed": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z_]+\\.[a-z_\\.]+$" },
+            "description": "Références tokens en dot-path DTCG (ex: 'colors.semantic.action-primary')"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["stable", "to_create_in_figma", "deprecated"],
+            "default": "stable"
+          }
+        }
+      }
+    },
+
+    "sizes": {
+      "type": "array",
+      "description": "Tailles disponibles si le composant a une propriété 'size'",
+      "items": {
+        "type": "object",
+        "required": ["name", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "status": {
+            "type": "string",
+            "enum": ["stable", "to_validate_with_labster", "deprecated"]
+          }
+        }
+      }
+    },
+
+    "icon_only_property": {
+      "type": "object",
+      "description": "Si le composant supporte un mode icon-only",
+      "required": ["description"],
+      "additionalProperties": false,
+      "properties": {
+        "description": { "type": "string" }
+      }
+    },
+
+    "props": {
+      "type": "array",
+      "description": "Props React exposées",
+      "items": {
+        "type": "object",
+        "required": ["name", "type", "required", "description"],
+        "additionalProperties": false,
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "required": { "type": "boolean" },
+          "description": { "type": "string" },
+          "default": { "type": "string" }
+        }
+      }
+    },
+
+    "states": {
+      "type": "array",
+      "minItems": 1,
+      "description": "États interactifs gérés (ex: ['default', 'hover', 'focus', 'disabled'])",
+      "items": { "type": "string" }
+    },
+
+    "tokens_consumed": {
+      "type": "array",
+      "description": "Union de tous les tokens consommés (tous variants confondus)",
+      "items": { "type": "string" }
+    },
+
+    "usage_recommended": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Contextes où utiliser ce composant (au moins 1 phrase requise)",
+      "items": { "type": "string" }
+    },
+
+    "usage_discouraged": {
+      "type": "array",
+      "description": "Contextes où NE PAS utiliser ce composant",
+      "items": { "type": "string" }
+    },
+
+    "examples": {
+      "type": "array",
+      "minItems": 1,
+      "description": "Exemples d'usage concrets (au moins 1 requis)",
+      "items": {
+        "type": "object",
+        "required": ["context", "code_snippet"],
+        "additionalProperties": false,
+        "properties": {
+          "context": { "type": "string" },
+          "code_snippet": { "type": "string" }
+        }
+      }
+    },
+
+    "composition": {
+      "type": "array",
+      "description": "Composants Labster utilisés en interne (pour molecules/organisms)",
+      "items": {
+        "type": "object",
+        "required": ["child_component", "cardinality"],
+        "additionalProperties": false,
+        "properties": {
+          "child_component": { "type": "string" },
+          "child_variant": { "type": "string" },
+          "cardinality": { "type": "string", "description": "Ex: '1', '0..n', '1..2'" }
+        }
+      }
+    },
+
+    "composition_rules": {
+      "type": "object",
+      "description": "Règles de nidification — quels parents/enfants sont autorisés ou interdits",
+      "additionalProperties": false,
+      "properties": {
+        "allowed_in": {
+          "type": "array",
+          "description": "Composants parents dans lesquels CE composant PEUT être utilisé. Vide = pas de contrainte.",
+          "items": { "type": "string" }
+        },
+        "forbidden_in": {
+          "type": "array",
+          "description": "Composants parents dans lesquels CE composant NE DOIT PAS être utilisé.",
+          "items": { "type": "string" }
+        },
+        "allowed_children": {
+          "type": "array",
+          "description": "Composants que CE composant PEUT contenir comme enfants.",
+          "items": { "type": "string" }
+        },
+        "forbidden_children": {
+          "type": "array",
+          "description": "Composants que CE composant NE DOIT PAS contenir.",
+          "items": { "type": "string" }
+        },
+        "rationale": {
+          "type": "string",
+          "description": "Explication des règles de composition (pourquoi ces contraintes)"
+        }
+      }
+    },
+
+    "source": {
+      "type": "object",
+      "required": ["figma_file_key", "figma_node_id", "figma_url", "inventory_date"],
+      "additionalProperties": false,
+      "description": "Référence Figma source du composant",
+      "properties": {
+        "figma_file_key": { "type": "string" },
+        "figma_node_id": { "type": "string" },
+        "figma_url": { "type": "string", "format": "uri" },
+        "inventory_date": { "type": "string", "description": "Date ISO 8601 (ex: '2026-05-22')" }
+      }
+    },
+
+    "accessibility_target": {
+      "type": "string",
+      "enum": ["WCAG AA", "WCAG AAA"],
+      "default": "WCAG AA"
+    },
+
+    "notes": {
+      "type": "array",
+      "description": "Notes critiques : conflits de tokens, variants manquants, décisions en attente",
+      "items": { "type": "string" }
+    },
+
+    "_meta": {
+      "type": "object",
+      "description": "Métadonnées générées automatiquement — ne pas éditer à la main",
+      "properties": {
+        "generated_at": { "type": "string" },
+        "source_hash": { "type": "string", "description": "Hash SHA-1 du metadata.ts source pour détecter les changements" },
+        "storybook_url": { "type": "string" }
+      }
+    }
+  }
+}
