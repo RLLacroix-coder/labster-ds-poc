@@ -12,12 +12,20 @@ Trois exemples dans le contexte SIG (Services Industriels de Genève) :
 ```markdown
 ### User Story 042 :
 
-- **Résumé :** Permettre la création de compte en ligne pour les nouveaux clients SIG
+**Vue d'ensemble :**
+> Un nouveau client SIG veut créer son espace client en ligne pour consulter ses factures
+> et ses contrats sans avoir à se déplacer en agence.
+
+- **Résumé :** Création de compte en ligne — nouveaux clients SIG (max 255 car.)
+
+---
 
 #### Cas d'usage :
 - **En tant que** nouveau client SIG souhaitant gérer ses contrats en ligne
 - **Je veux** créer mon espace client depuis le site SIG sans passer par l'agence
 - **afin de** pouvoir consulter mes factures et mes contrats à tout moment, sans me déplacer
+
+---
 
 #### Critères d'acceptation :
 - **Scénario :** Création de compte réussie par un nouveau client SIG depuis le web
@@ -26,14 +34,26 @@ Trois exemples dans le contexte SIG (Services Industriels de Genève) :
 - **Et étant donné que** le bouton "Créer mon compte" est visible
 - **Quand** je complète le formulaire de création (nom, prénom, adresse, numéro de contrat) et je clique sur "Valider"
 - **Alors** je reçois un email de confirmation avec un lien d'activation dans les 2 minutes
+
+---
+
+#### Métadonnées Azure DevOps :
+- **Priorité :** 2 — Haute
+- **Points :** 3
+- **Itération :** SIG\Sprint 3
+- **Zone :** SIG\Portail client
+- **Assigné à :** PO Portail
+- **Tags :** portail-client, création-compte, self-service, email-activation
 ```
 
 **Pourquoi ça fonctionne :**
+- **Vue d'ensemble** : lisible en 5 secondes par le PO — pas besoin de lire les critères pour comprendre la valeur
 - Persona précis ("nouveau client SIG souhaitant gérer ses contrats en ligne")
 - Action claire et unique ("créer mon espace client")
 - Valeur explicitée ("sans me déplacer") — pas le mécanisme
 - Critères testables par le QA (email dans les 2 min, lien d'activation)
 - Un seul Quand, un seul Alors
+- Métadonnées ADO complètes — prêt à exporter via `/ado-create-story`
 
 ---
 

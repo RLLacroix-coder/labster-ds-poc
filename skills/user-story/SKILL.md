@@ -2,7 +2,7 @@
 
 Ce skill traduit un besoin métier en User Stories structurées avec des critères d'acceptation testables (format Gherkin). Il correspond à l'**Étape 1** du workflow de production de feature décrit dans `CLAUDE.md`.
 
-## Processus en 5 étapes
+## Processus en 6 étapes
 
 ### 1. Collecter le contexte
 - Identifier le persona précis (éviter "En tant qu'utilisateur")
@@ -10,28 +10,56 @@ Ce skill traduit un besoin métier en User Stories structurées avec des critèr
 - Identifier l'outcome souhaité
 - Noter les contraintes (UX, métier, technique, légal)
 
-### 2. Rédiger le cas d'usage
+### 2. Écrire la Vue d'ensemble (pour le PO)
+Avant tout le reste, rédiger **une phrase en langage courant** accessible à tous :
+> "[Qui] veut [quoi], pour [pourquoi c'est utile]."
+
+Cette phrase est ce que le PO lit en premier pour valider le sens. Elle devient aussi le contexte que le Designer lit avant de générer l'intention de design.
+
+### 3. Rédiger le cas d'usage
 Compléter ce template avec précision :
 - **En tant que** [persona/rôle] — nommer des rôles précis si disponibles
 - **Je veux** [action que l'utilisateur effectue]
 - **afin de** [outcome souhaité pour l'utilisateur]
 
-### 3. Rédiger les critères d'acceptation
-Format Gherkin :
+### 4. Rédiger les critères d'acceptation
+Format Gherkin — écrire en français courant, pas en langage technique :
 - **Scénario :** [description lisible de la valeur]
 - **Étant donné que** [préconditions]
 - **Et étant donné que** [préconditions additionnelles]
 - **Quand** [événement déclencheur]
 - **Alors** [résultat attendu, aligné sur "afin de"]
 
-### 4. Ajouter un résumé
-Titre court et mémorable centré sur la valeur utilisateur, pas sur l'implémentation.
-
 ### 5. Valider et affiner
 - Réviser avec l'équipe (PO + Designer en itération US-Design, cf. Étape 2a)
 - Vérifier la clarté : le persona est-il précis ?
 - Vérifier la complétude : le "afin de" explique-t-il la valeur, pas le mécanisme ?
 - Vérifier le périmètre : un seul Quand/Alors ?
+- Vérifier la lisibilité PO : la Vue d'ensemble est-elle compréhensible sans contexte technique ?
+
+### 6. Exporter vers Azure DevOps
+Une fois la story validée à la porte ①, exporter vers ADO via le skill `ado-create-story` :
+
+```
+/ado-create-story
+```
+
+**Correspondance champs US → Work Item ADO :**
+
+| Champ User Story | Champ Azure DevOps | Notes |
+|---|---|---|
+| Résumé | Title | Max 255 caractères |
+| Vue d'ensemble + Cas d'usage | Description | Formaté en HTML dans ADO |
+| Critères d'acceptation | Acceptance Criteria | Texte Gherkin conservé tel quel |
+| Priorité | Priority | 1 (Critique) à 4 (Basse) |
+| Points | Story Points | Estimation effort |
+| Itération | Iteration Path | ex : `SIG\Sprint 3` |
+| Zone | Area Path | ex : `SIG\Portail client` |
+| Tags | Tags | Mots-clés séparés par `;` dans ADO |
+
+Le Work Item créé est de type **User Story** et devient visible par toute l'équipe (POs, Designers, Développeurs, Testeurs) dans le board ADO du projet.
+
+> **Note** : le skill `ado-create-story` est configuré sur [app.mcpmarket.com/rla-rlacroix/skills/ado-create-story](https://app.mcpmarket.com/rla-rlacroix/skills/ado-create-story). Vérifier le mapping exact des paramètres avec la configuration du projet ADO SIG.
 
 ---
 
@@ -87,12 +115,15 @@ Ce skill s'utilise à l'**Étape 1** du master process (`examples/master-process
 
 ```
 Brief métier (PO)
-    ↓  [ce skill] : génère le draft de User Stories + critères d'acceptation
-[User Stories + CA]  ← porte ① : PO valide
+    ↓  [ce skill] : génère le draft de User Stories + Vue d'ensemble + critères d'acceptation
+[User Stories + CA]  ← porte ① : PO valide (lisibilité : Vue d'ensemble · testabilité : Alors)
+    ↓  [étape 6 de ce skill] : export vers Azure DevOps via /ado-create-story
+[Work Items ADO créés — visibles PO · Designer · Dev · Testeurs]
 
     ↓  Designer + IA : Intention de design (Étape 2a)
 ⟳  ITÉRATION US-Design : la frame révèle des US manquantes → retour à ce skill
 [Intention de design + US finalisées]  ← porte ②
+    ↓  mise à jour des Work Items ADO si les US évoluent
 ```
 
 **Prompt de rôle PO** (cf. `CLAUDE.md`) :
@@ -101,13 +132,30 @@ Tu es PO chez <Client>. Mets au propre ce brief : structure en sections
 (Contexte métier, Logique métier, Critères d'acceptation, Cas d'usage).
 Pose les questions qui manquent pour le scope V1.0.
 NE PAS inventer de règles métier — flag les ambiguïtés.
+Pour chaque User Story : rédige d'abord la Vue d'ensemble en une phrase
+avant le cas d'usage et les critères d'acceptation.
 ```
+
+---
+
+## Lisibilité pour les POs non techniques
+
+Les User Stories générées par ce skill sont structurées pour être lisibles à deux niveaux :
+
+**Niveau 1 — Vue d'ensemble** (pour le PO en relecture rapide)
+Une phrase en langage courant. Pas de jargon, pas de format Gherkin. Le PO peut valider le sens en 5 secondes.
+
+**Niveau 2 — Critères d'acceptation Gherkin** (pour les Testeurs et Développeurs)
+Format structuré permettant une vérification objective. Rédigé en français courant même s'il suit la structure Étant donné que / Quand / Alors.
+
+Les deux niveaux coexistent dans le même document et dans le même Work Item ADO (Vue d'ensemble dans Description, Gherkin dans Acceptance Criteria).
 
 ---
 
 ## Liens
 
-- `skills/user-story/template.md` — template à compléter
+- `skills/user-story/template.md` — template complet (Vue d'ensemble + Gherkin + Métadonnées ADO)
 - `skills/user-story/examples/sample.md` — exemples annotés (bonne story, mauvaise story, story à décomposer)
 - `skills/story-splitting/SKILL.md` — décomposer les grandes stories en unités livrables *(à créer)*
 - `examples/master-process-ia-ux-ui-sig-2026-06-22.md` — workflow complet Brief → US → Design → Code
+- [ado-create-story](https://app.mcpmarket.com/rla-rlacroix/skills/ado-create-story) — skill d'export Azure DevOps
