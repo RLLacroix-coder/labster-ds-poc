@@ -213,3 +213,40 @@ Quand l'IA est sollicitée par rôle métier, démarre le prompt par le préambu
 ## Tech Lead
 
 > Tu es Tech Lead chez Labster. Applique le protocole ARC sur la feature `<X>` : AUDIT (composants DS utilisés, cf. `.ai/index.json`), REPORT (tokens consommés vs `.ai/design-tokens.json`, flag écarts), COMPOSE (3 améliorations priorisées : cohérence DS / sécurité / accessibilité / perf). Cite fileKey + nodeId Figma source.
+
+---
+
+# Azure DevOps
+
+Configuration requise par le skill `/ado-create-story` (`skills/ado-create-story/SKILL.md`).
+
+- **Organization** : `[À CONFIGURER — ex : labster]`
+- **Project** : `[À CONFIGURER — ex : SIG-Portail-Client]`
+- **Team** : `[À CONFIGURER — ex : SIG Team]`
+- **Area Path par défaut** : `[À CONFIGURER — ex : SIG\Portail client]`
+- **Iteration Path par défaut** : `[À CONFIGURER — ex : SIG\Sprint 1]`
+
+## Utilisation
+
+1. **Prérequis** : avoir un **ID de Feature parent** dans ADO (chaque User Story est enfant d'une Feature).
+2. **Export** : une fois la story validée à la porte ①, invoquer `/ado-create-story` avec les métadonnées ADO renseignées dans la story (cf. `skills/user-story/template.md`).
+3. **Modes** : le skill propose deux modes — AI-powered (génère title/description/critères depuis la story) ou Manual (champs à saisir un par un).
+4. **Résultat** : lien direct vers le Work Item créé — `https://dev.azure.com/[ORGANIZATION]/[PROJECT]/_workitems/edit/[STORY_ID]`
+
+## Types de Work Items
+
+- **User Story** : type utilisé pour les stories générées par `skills/user-story/SKILL.md`
+- **Feature** : parent obligatoire — créer ou identifier la Feature avant de créer les stories enfants
+
+## Champs ADO utilisés
+
+| Champ ADO | Chemin technique | Source dans la story |
+|---|---|---|
+| Title | `System.Title` | Résumé (max 255 car.) |
+| Description | `System.Description` | Vue d'ensemble + Cas d'usage (HTML) |
+| Acceptance Criteria | `Microsoft.VSTS.Common.AcceptanceCriteria` | Critères Gherkin |
+| Story Points | `Microsoft.VSTS.Scheduling.StoryPoints` | Points |
+| Priority | `Microsoft.VSTS.Common.Priority` | Priorité (1-4) |
+| Iteration Path | `System.IterationPath` | Itération |
+| Area Path | `System.AreaPath` | Zone |
+| Tags | `System.Tags` | Tags (séparés par `;`) |

@@ -44,22 +44,30 @@ Une fois la story validée à la porte ①, exporter vers ADO via le skill `ado-
 /ado-create-story
 ```
 
+**Prérequis avant l'export :**
+- Avoir un **ID de Feature parent** dans ADO (ex : `Feature #142 — Portail client self-service`). Le skill crée la story comme Work Item *enfant* de cette Feature — sans Feature ID, l'export échoue.
+- La section `## Azure DevOps` de `CLAUDE.md` doit être configurée (org, project, team, area path, iteration path).
+
 **Correspondance champs US → Work Item ADO :**
 
-| Champ User Story | Champ Azure DevOps | Notes |
+| Champ User Story | Champ Azure DevOps | Chemin technique |
 |---|---|---|
-| Résumé | Title | Max 255 caractères |
-| Vue d'ensemble + Cas d'usage | Description | Formaté en HTML dans ADO |
-| Critères d'acceptation | Acceptance Criteria | Texte Gherkin conservé tel quel |
-| Priorité | Priority | 1 (Critique) à 4 (Basse) |
-| Points | Story Points | Estimation effort |
-| Itération | Iteration Path | ex : `SIG\Sprint 3` |
-| Zone | Area Path | ex : `SIG\Portail client` |
-| Tags | Tags | Mots-clés séparés par `;` dans ADO |
+| Résumé | Title | `System.Title` (max 255 car.) |
+| Vue d'ensemble + Cas d'usage | Description | `System.Description` (HTML) |
+| Critères d'acceptation | Acceptance Criteria | `Microsoft.VSTS.Common.AcceptanceCriteria` |
+| Priorité | Priority | `Microsoft.VSTS.Common.Priority` (1-4) |
+| Points | Story Points | `Microsoft.VSTS.Scheduling.StoryPoints` |
+| Itération | Iteration Path | `System.IterationPath` (ex : `SIG\Sprint 3`) |
+| Zone | Area Path | `System.AreaPath` (ex : `SIG\Portail client`) |
+| Tags | Tags | `System.Tags` (séparés par `;`) |
+
+**Modes disponibles :**
+- **AI-powered** : le skill génère title, description, critères depuis la story — à valider avant création.
+- **Manuel** : saisie champ par champ.
 
 Le Work Item créé est de type **User Story** et devient visible par toute l'équipe (POs, Designers, Développeurs, Testeurs) dans le board ADO du projet.
 
-> **Note** : le skill `ado-create-story` est configuré sur [app.mcpmarket.com/rla-rlacroix/skills/ado-create-story](https://app.mcpmarket.com/rla-rlacroix/skills/ado-create-story). Vérifier le mapping exact des paramètres avec la configuration du projet ADO SIG.
+Résultat : lien direct `https://dev.azure.com/[ORG]/[PROJECT]/_workitems/edit/[ID]`.
 
 ---
 

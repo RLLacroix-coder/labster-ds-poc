@@ -38,6 +38,10 @@
   - [rules/component-schema.v1.json](rules/component-schema.v1.json) — schéma JSON de validation CI
   - [rules/add-component-method.md](rules/add-component-method.md) — méthode d'ajout d'un composant
 - [skills/](skills/) — skills Claude Code
+  - [skills/user-story/SKILL.md](skills/user-story/SKILL.md) — rédaction de User Stories (FR, format Gherkin, export ADO)
+  - [skills/user-story/template.md](skills/user-story/template.md) — template complet avec Métadonnées ADO
+  - [skills/user-story/examples/sample.md](skills/user-story/examples/sample.md) — exemples annotés (bonne / mauvaise / à décomposer)
+  - [skills/ado-create-story/SKILL.md](skills/ado-create-story/SKILL.md) — export vers Azure DevOps Work Items
 - [.claude/](. claude/) — configuration Claude Code (hooks, settings)
 
 ### Descriptions Figma dédiées
