@@ -28,5 +28,5 @@ storybook-static/
 *.tsbuildinfo
 
 # Travaux client (contenu SIG et autres clients) — local uniquement, ne pas pousser
-examples/
+/examples/
 src/patterns/CreationCompteSIG.stories.tsx
