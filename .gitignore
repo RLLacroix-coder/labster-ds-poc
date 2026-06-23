@@ -26,3 +26,7 @@ storybook-static/
 
 # Type checking
 *.tsbuildinfo
+
+# Travaux client (contenu SIG et autres clients) — local uniquement, ne pas pousser
+examples/
+src/patterns/CreationCompteSIG.stories.tsx
